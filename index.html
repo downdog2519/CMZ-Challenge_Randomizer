@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CMZ Challenge Generator</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="appContainer">
+
+<header class="top-bar">
+    <div class="title-with-logo">
+        <img src="./images/cmz.png" alt="CMZ Logo" class="cmz-logo">
+        <span class="title-text">Challenge Generator</span>
+    </div>
+</header>
+
+
+        <main class="main-layout">
+
+            <!-- LEFT PANEL -->
+            <section id="setupContainer" class="panel panel-left">
+                <h2>Setup</h2>
+
+                <!-- MOVED HERE -->
+                <button id="modeToggleBtn" class="wide-btn">Mode: Standard Challenges</button>
+
+                <button id="playerToggleBtn" class="wide-btn">Player Count: Solo</button>
+
+                <div id="gamertagInputs" class="gamertag-container"></div>
+
+                <h3>Relic Ownership</h3>
+                <div class="relic-columns">
+                    <div id="grimColumn" class="relic-column"></div>
+                    <div id="sinisterColumn" class="relic-column"></div>
+                    <div id="wickedColumn" class="relic-column"></div>
+                </div>
+
+                <div class="session-stats">
+                    <div><strong>Session Wins:</strong> <span id="sessionWinsValue">0</span></div>
+                    <div><strong>Session Fails:</strong> <span id="sessionFailsValue">0</span></div>
+                    <button id="resetSessionBtn" class="small-btn">Reset Session Stats</button>
+                </div>
+
+                <button id="confirmPlayersBtn" class="primary-btn">Confirm & Start</button>
+            </section>
+
+            <!-- DIVIDER LINE -->
+            <div class="vertical-divider"></div>
+
+            <!-- RIGHT PANEL -->
+            <section id="challengeArea" class="panel panel-right" style="display:none;">
+                <h2>Current Challenge</h2>
+
+                <div id="challengeButtons" class="challenge-buttons">
+                    <button id="bossBtn" class="primary-btn">Boss Challenge</button>
+                    <button id="survivalBtn" class="primary-btn">Survival of the Fit</button>
+                    <button id="trailBtn" class="primary-btn">Relic Trail</button>
+                </div>
+
+                <div id="result" class="challenge-result"></div>
+
+                <div id="stopwatchTimer" class="stopwatch"></div>
+
+                <div class="control-row">
+                    <button id="beginBtn" class="primary-btn" style="display:none;">Begin Challenge</button>
+                    <div id="passFailContainer" class="pass-fail" style="display:none;">
+                        <button id="passBtn" class="pass-btn">Pass</button>
+                        <button id="failBtn" class="fail-btn">Fail</button>
+                    </div>
+                </div>
+
+                <button id="newChallengeBtn" class="secondary-btn">Reset Challenges</button>
+            </section>
+
+        </main>
+    </div>
+
+    <script type="module" src="./app/renderer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+</body>
+</html>
+
+
+

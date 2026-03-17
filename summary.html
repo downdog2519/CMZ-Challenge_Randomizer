@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CMZ Challenge Summary</title>
+    <link rel="stylesheet" href="./style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</head>
+<body>
+    <div id="appContainer">
+        <header class="top-bar">
+            <h1>Run Summary</h1>
+        </header>
+
+        <main class="main-layout">
+            <section class="panel panel-full">
+                <div id="summaryContent"></div>
+
+                <button id="saveScreenshotBtn" class="secondary-btn">Save Screenshot</button>
+                <button id="backBtn" class="primary-btn">Back to Generator</button>
+            </section>
+        </main>
+    </div>
+
+    <!-- FIXED: Load data.js BEFORE summary.js -->
+    <script type="module">
+        import "./app/data.js";
+        import "./app/summary.js";
+    </script>
+</body>
+</html>
+
