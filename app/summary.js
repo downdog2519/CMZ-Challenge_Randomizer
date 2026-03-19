@@ -19,6 +19,13 @@ function getMapClass(map) {
     if (map === "Astra") return "map-astra";
     if (map === "Ashes of the Damned") return "map-ashes";
     if (map === "Paradox Junction") return "map-paradox";
+
+    // Survival maps
+    if (map === "Vandorn Farm") return "map-vandorn";
+    if (map === "Exit 115") return "map-exit115";
+    if (map === "Zarya Cosmodrome") return "map-zarya";
+    if (map === "Mars") return "map-mars";
+
     return "";
 }
 
@@ -34,25 +41,26 @@ function renderSummary() {
     const container = document.getElementById("summaryContent");
     if (!container) return;
 
-    const saved = sessionStorage.getItem("completedRun");
-    if (!saved) {
+    const raw = sessionStorage.getItem("completedRun");
+    if (!raw) {
         container.innerHTML = "<p>No summary data found.</p>";
         return;
     }
 
-    const summary = JSON.parse(saved);
+    const summary = JSON.parse(raw);
     const challenges = summary.challenges || [];
 
     let html = "";
 
     /* ===================== PLAYERS ===================== */
-    html += `<p><strong>Players:</strong> ${
-        summary.players
-            .map((p, i) => `<span class="${getPlayerClass(i)}">${p}</span>`)
-            .join(", ")
-    }</p>`;
-
-    html += `<hr>`;
+    html += `
+        <p><strong>Players:</strong>
+            ${summary.players
+                .map((p, i) => `<span class="${getPlayerClass(i)}">${p}</span>`)
+                .join(", ")}
+        </p>
+        <hr>
+    `;
 
     /* ===================== CHALLENGES ===================== */
     challenges.forEach((c, idx) => {
@@ -63,7 +71,9 @@ function renderSummary() {
 
         html += `
             <div class="challenge-section">
-                <div class="challenge-section-title">Challenge ${idx + 1} (${c.mode} - ${c.type})</div>
+                <div class="challenge-section-title">
+                    Challenge ${idx + 1} (${c.mode} - ${c.type})
+                </div>
 
                 ${c.map ? `
                     <div class="challenge-line">
@@ -90,16 +100,22 @@ function renderSummary() {
                 ${c.relics && c.relics.length ? `
                     <div class="challenge-line">
                         <strong>Relics:</strong>
-                        ${c.relics.map(r => `<span class="${getRelicClass(r)}">${r}</span>`).join(", ")}
+                        ${c.relics
+                            .map(r => `<span class="${getRelicClass(r)}">${r}</span>`)
+                            .join(", ")}
                     </div>` : ""}
 
                 ${c.fieldUpgrades ? `
                     <div class="challenge-line">
                         <strong>Field Upgrades:</strong>
-                        ${c.fieldUpgrades.map(f => `<span class="field-upgrade">${f.upgrade}</span>`).join(", ")}
+                        ${c.fieldUpgrades
+                            .map(f => `<span class="field-upgrade">${f.upgrade}</span>`)
+                            .join(", ")}
                     </div>` : ""}
 
-                <div class="challenge-line"><strong>Time:</strong> ${timeStr}</div>
+                <div class="challenge-line">
+                    <strong>Time:</strong> ${timeStr}
+                </div>
             </div>
         `;
     });
@@ -129,7 +145,6 @@ document.getElementById("saveScreenshotBtn")?.addEventListener("click", () => {
 ============================================================ */
 
 renderSummary();
-
 
 
 

@@ -36,9 +36,16 @@ window.addEventListener("DOMContentLoaded", () => {
         $("gamertagInputs").style.display = "block";
     }
 
+    // Summary page support
     if ($("summaryContent")) {
         const summary = buildSummaryObject();
         if (summary) renderSummaryData(summary);
+    }
+
+    // Restore UI if a run was in progress
+    if (state.currentRun.length > 0) {
+        $("setupContainer").classList.add("locked");
+        $("challengeArea").style.display = "block";
     }
 });
 
@@ -46,161 +53,135 @@ window.addEventListener("DOMContentLoaded", () => {
    PLAYER COUNT TOGGLE
 ============================================================ */
 
-if ($("playerToggleBtn")) {
-    $("playerToggleBtn").addEventListener("click", () => {
-        let count = state.playerCount + 1;
-        if (count > 4) count = 1;
+$("playerToggleBtn")?.addEventListener("click", () => {
+    let count = state.playerCount + 1;
+    if (count > 4) count = 1;
 
-        state.playerCount = count;
-        state.gamertags.length = count;
+    state.playerCount = count;
+    state.gamertags.length = count;
 
-        $("playerToggleBtn").textContent =
-            count === 1 ? "Player Count: Solo" : `Player Count: ${count}`;
+    $("playerToggleBtn").textContent =
+        count === 1 ? "Player Count: Solo" : `Player Count: ${count}`;
 
-        renderGamertagInputs();
-        saveSession();
-    });
-}
+    renderGamertagInputs();
+    saveSession();
+});
 
 /* ============================================================
    MODE TOGGLE
 ============================================================ */
 
-if ($("modeToggleBtn")) {
-    $("modeToggleBtn").addEventListener("click", () => {
-        toggleMode();
-        updateModeLabel();
-    });
-}
+$("modeToggleBtn")?.addEventListener("click", () => {
+    toggleMode();
+    updateModeLabel();
+});
 
 /* ============================================================
    CONFIRM PLAYERS
 ============================================================ */
 
-if ($("confirmPlayersBtn")) {
-    $("confirmPlayersBtn").addEventListener("click", () => {
-        if (!confirmPlayers()) return;
+$("confirmPlayersBtn")?.addEventListener("click", () => {
+    if (!confirmPlayers()) return;
 
-        $("setupContainer").style.display = "none";
-        $("challengeArea").style.display = "block";
+    // NEW: Lock setup instead of hiding it
+    $("setupContainer").classList.add("locked");
 
-        resetRun();
+    // Show challenge panel on the right
+    $("challengeArea").style.display = "block";
 
-        const beginBtn = $("beginBtn");
-        const passFail = $("passFailContainer");
-        if (beginBtn && passFail) {
-            beginBtn.style.display = "none";
-            passFail.style.display = "none";
-        }
+    resetRun();
 
-        if (state.challengeModeType === "standard") {
-            if ($("challengeButtons")) $("challengeButtons").style.display = "block";
-        } else {
-            if ($("challengeButtons")) $("challengeButtons").style.display = "none";
-            setupExtremeQueue();
-            generateNextExtremeChallenge();
-        }
-    });
-}
+    // Reset trail relic confirmation
+    state.selectedTrailRelic = null;
+    saveSession();
+
+    // Reset Begin / Pass / Fail UI
+    $("beginBtn").style.display = "none";
+    $("passFailContainer").style.display = "none";
+
+    if (state.challengeModeType === "standard") {
+        $("challengeButtons").style.display = "block";
+    } else {
+        $("challengeButtons").style.display = "none";
+        setupExtremeQueue();
+        generateNextExtremeChallenge();
+    }
+});
 
 /* ============================================================
    CHALLENGE BUTTONS (STANDARD ONLY)
 ============================================================ */
 
-if ($("bossBtn")) {
-    $("bossBtn").addEventListener("click", () => {
-        if (state.challengeModeType !== "standard") return;
-        if (state.currentRun.some(c => c.type === "boss")) return;
-        generateChallenge("boss");
-    });
-}
+$("bossBtn")?.addEventListener("click", () => {
+    if (state.challengeModeType !== "standard") return;
+    if (state.currentRun.some(c => c.type === "boss")) return;
+    generateChallenge("boss");
+});
 
-if ($("survivalBtn")) {
-    $("survivalBtn").addEventListener("click", () => {
-        if (state.challengeModeType !== "standard") return;
-        if (state.currentRun.some(c => c.type === "survival")) return;
-        generateChallenge("survival");
-    });
-}
+$("survivalBtn")?.addEventListener("click", () => {
+    if (state.challengeModeType !== "standard") return;
+    if (state.currentRun.some(c => c.type === "survival")) return;
+    generateChallenge("survival");
+});
 
-if ($("trailBtn")) {
-    $("trailBtn").addEventListener("click", () => {
-        if (state.challengeModeType !== "standard") return;
-        if (state.currentRun.some(c => c.type === "trail")) return;
-        generateChallenge("trail");
-    });
-}
+$("trailBtn")?.addEventListener("click", () => {
+    if (state.challengeModeType !== "standard") return;
+    if (state.currentRun.some(c => c.type === "trail")) return;
+    generateChallenge("trail");
+});
 
 /* ============================================================
    BEGIN / PASS / FAIL
 ============================================================ */
 
-if ($("beginBtn")) {
-    $("beginBtn").addEventListener("click", () => {
-        if (!state.currentRun.length) return;
+$("beginBtn")?.addEventListener("click", () => {
+    if (!state.currentRun.length) return;
 
-        resetStopwatch();
-        startStopwatch();
+    resetStopwatch();
+    startStopwatch();
 
-        const beginBtn = $("beginBtn");
-        const passFail = $("passFailContainer");
-        if (beginBtn && passFail) {
-            beginBtn.style.display = "none";
-            passFail.style.display = "inline-block";
-        }
-    });
-}
+    $("beginBtn").style.display = "none";
+    $("passFailContainer").style.display = "inline-block";
+});
 
-if ($("passBtn")) {
-    $("passBtn").addEventListener("click", () => {
-        if (!state.currentRun.length) return;
-        markPass();
-        updateSessionStats();
-    });
-}
+$("passBtn")?.addEventListener("click", () => {
+    if (!state.currentRun.length) return;
+    markPass();
+    updateSessionStats();
+});
 
-if ($("failBtn")) {
-    $("failBtn").addEventListener("click", () => {
-        if (!state.currentRun.length) return;
-        markFail();
-        updateSessionStats();
-    });
-}
+$("failBtn")?.addEventListener("click", () => {
+    if (!state.currentRun.length) return;
+    markFail();
+    updateSessionStats();
+});
 
 /* ============================================================
-   NEW CHALLENGE (FULL RESET TO PLAYER SELECTION)
+   NEW CHALLENGE (FULL RESET)
 ============================================================ */
 
-if ($("newChallengeBtn")) {
-    $("newChallengeBtn").addEventListener("click", () => {
-        resetRun();
-        if ($("result")) $("result").innerHTML = "";
+$("newChallengeBtn")?.addEventListener("click", () => {
+    resetRun();
+    $("result").innerHTML = "";
 
-        const setup = $("setupContainer");
-        const area = $("challengeArea");
-        if (setup && area) {
-            setup.style.display = "block";
-            area.style.display = "none";
-        }
+    // NEW: Unlock setup again
+    $("setupContainer").classList.remove("locked");
 
-        const beginBtn = $("beginBtn");
-        const passFail = $("passFailContainer");
-        if (beginBtn && passFail) {
-            beginBtn.style.display = "none";
-            passFail.style.display = "none";
-        }
-    });
-}
+    // Hide challenge area again
+    $("challengeArea").style.display = "none";
+
+    $("beginBtn").style.display = "none";
+    $("passFailContainer").style.display = "none";
+});
 
 /* ============================================================
    RESET SESSION STATS
 ============================================================ */
 
-if ($("resetSessionBtn")) {
-    $("resetSessionBtn").addEventListener("click", () => {
-        resetSessionStats();
-        updateSessionStats();
-    });
-}
+$("resetSessionBtn")?.addEventListener("click", () => {
+    resetSessionStats();
+    updateSessionStats();
+});
+
 
 

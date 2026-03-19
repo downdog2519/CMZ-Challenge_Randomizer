@@ -20,7 +20,8 @@ import {
     renderSurvivalChallenge,
     renderTrailChallenge,
     renderStopwatch,
-    clearChallengePanel
+    clearChallengePanel,
+    applyMapTheme
 } from "./ui.js";
 
 /* ============================================================
@@ -36,6 +37,13 @@ export function confirmPlayers() {
             }
         }
     }
+
+    // Prevent Extreme mode with 0 relics
+    if (state.challengeModeType === "extreme" && state.unlockedRelics.length === 0) {
+        alert("You must unlock at least one relic before starting Extreme mode.");
+        return false;
+    }
+
     return true;
 }
 
@@ -147,6 +155,8 @@ export function generateStandardBoss() {
     const maps = ["Astra", "Ashes of the Damned", "Paradox Junction"];
     const map = pickRandom(maps);
 
+    applyMapTheme(map);
+
     const fieldUp = assignFieldUpgrades();
 
     const data = {
@@ -160,11 +170,11 @@ export function generateStandardBoss() {
     return data;
 }
 
-/* ===================== STANDARD SURVIVAL ===================== */
-
 export function generateStandardSurvival() {
     const round = weightedPick(survivalRoundValues, survivalRoundWeights);
     const map = pickRandom(survivalMaps);
+
+    applyMapTheme(map);
 
     const owned = getUnlockedRelics();
     let relics = [];
@@ -192,17 +202,23 @@ export function generateStandardSurvival() {
     return data;
 }
 
-/* ===================== STANDARD TRAIL ===================== */
-
 export function generateStandardTrail() {
     const maps = ["Astra", "Ashes of the Damned", "Paradox Junction"];
     const map = pickRandom(maps);
 
+    applyMapTheme(map);
+
     let requiredRelic = null;
 
-    if (map === "Astra") requiredRelic = pickRandom(trailRules.astra.pool);
-    if (map === "Ashes of the Damned") requiredRelic = pickRandom(trailRules.ashes.pool);
-    if (map === "Paradox Junction") requiredRelic = "Rocket";
+    if (map === "Astra") {
+        requiredRelic = pickRandom(trailRules["Astra"].pool);
+    }
+    if (map === "Ashes of the Damned") {
+        requiredRelic = pickRandom(trailRules["Ashes of the Damned"].pool);
+    }
+    if (map === "Paradox Junction") {
+        requiredRelic = pickRandom(trailRules["Paradox Junction"].pool);
+    }
 
     const data = {
         map,
@@ -257,6 +273,8 @@ export function generateExtremeBoss() {
     const maps = ["Astra", "Ashes of the Damned", "Paradox Junction"];
     const map = pickRandom(maps);
 
+    applyMapTheme(map);
+
     const fieldUp = assignFieldUpgrades();
 
     const data = {
@@ -270,11 +288,11 @@ export function generateExtremeBoss() {
     return data;
 }
 
-/* ===================== EXTREME SURVIVAL ===================== */
-
 export function generateExtremeSurvival() {
     const round = weightedPick(survivalRoundValues, survivalRoundWeights);
     const map = pickRandom(survivalMaps);
+
+    applyMapTheme(map);
 
     const relics = getExtremeRelics();
     const fieldUp = assignFieldUpgrades();
@@ -290,17 +308,23 @@ export function generateExtremeSurvival() {
     return data;
 }
 
-/* ===================== EXTREME TRAIL ===================== */
-
 export function generateExtremeTrail() {
     const maps = ["Astra", "Ashes of the Damned", "Paradox Junction"];
     const map = pickRandom(maps);
 
+    applyMapTheme(map);
+
     let requiredRelic = null;
 
-    if (map === "Astra") requiredRelic = pickRandom(trailRules.astra.pool);
-    if (map === "Ashes of the Damned") requiredRelic = pickRandom(trailRules.ashes.pool);
-    if (map === "Paradox Junction") requiredRelic = "Rocket";
+    if (map === "Astra") {
+        requiredRelic = pickRandom(trailRules["Astra"].pool);
+    }
+    if (map === "Ashes of the Damned") {
+        requiredRelic = pickRandom(trailRules["Ashes of the Damned"].pool);
+    }
+    if (map === "Paradox Junction") {
+        requiredRelic = pickRandom(trailRules["Paradox Junction"].pool);
+    }
 
     const data = {
         map,
@@ -375,21 +399,20 @@ export function generateChallenge(type) {
         timeSeconds: 0
     };
 
-    if (isDuplicateChallenge(packaged)) {
+    // Duplicate checking only in Standard mode
+    if (state.challengeModeType === "standard" && isDuplicateChallenge(packaged)) {
         return generateChallenge(type);
     }
 
     state.currentRun.push(packaged);
     saveSession();
 
-    // Hide standard buttons after use
     if (state.challengeModeType === "standard") {
         if (type === "boss") $("bossBtn").style.display = "none";
         if (type === "survival") $("survivalBtn").style.display = "none";
         if (type === "trail") $("trailBtn").style.display = "none";
     }
 
-    // Always show Begin button for new challenge
     const beginBtn = $("beginBtn");
     const passFail = $("passFailContainer");
     if (beginBtn && passFail) {
@@ -415,7 +438,6 @@ export function setupExtremeQueue() {
 export function generateNextExtremeChallenge() {
     if (state.extremeIndex >= state.extremeQueue.length) return;
 
-    // UI reset BEFORE generating next challenge (critical fix)
     const beginBtn = $("beginBtn");
     const passFail = $("passFailContainer");
     if (beginBtn && passFail) {
@@ -442,24 +464,21 @@ export function markPass() {
 
     saveSession();
 
-    // Hide pass/fail, but DO NOT hide Begin (fix)
     const beginBtn = $("beginBtn");
     const passFail = $("passFailContainer");
     if (beginBtn && passFail) {
         passFail.style.display = "none";
     }
 
-    // Finish run after 3 challenges
     if (state.currentRun.length === 3) {
         finishRun();
         return;
     }
 
-    // EXTREME MODE FLOW
     if (state.challengeModeType === "extreme") {
         state.extremeIndex++;
 
-        resetStopwatch(); // ensure clean state
+        resetStopwatch();
 
         if (state.extremeIndex < state.extremeQueue.length) {
             generateNextExtremeChallenge();
@@ -476,6 +495,7 @@ export function markFail() {
     const setup = $("setupContainer");
     const area = $("challengeArea");
     if (setup && area) {
+        setup.classList.remove("locked");   // unlock setup
         setup.style.display = "block";
         area.style.display = "none";
     }
@@ -520,5 +540,4 @@ export function resetRun() {
     resetRunState();
     clearChallengePanel();
 }
-
 

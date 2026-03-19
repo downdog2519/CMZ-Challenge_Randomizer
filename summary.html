@@ -3,31 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>CMZ Challenge Summary</title>
+
+    <!-- Main Styles -->
     <link rel="stylesheet" href="./style.css">
 
+    <!-- Screenshot Library -->
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </head>
+
 <body>
+
     <div id="appContainer">
+
+        <!-- HEADER -->
         <header class="top-bar">
             <h1>Run Summary</h1>
         </header>
 
+        <!-- MAIN CONTENT -->
         <main class="main-layout">
             <section class="panel panel-full">
+
+                <!-- Summary Output -->
                 <div id="summaryContent"></div>
 
-                <button id="saveScreenshotBtn" class="secondary-btn">Save Screenshot</button>
-                <button id="backBtn" class="primary-btn">Back to Generator</button>
+                <!-- Buttons -->
+                <div class="summary-buttons">
+                    <button id="saveScreenshotBtn" class="secondary-btn">Save Screenshot</button>
+                    <button id="backBtn" class="primary-btn">Back to Generator</button>
+                </div>
+
             </section>
         </main>
+
     </div>
 
-    <!-- FIXED: Load data.js BEFORE summary.js -->
+    <!-- MODULES -->
     <script type="module">
-        import "./app/data.js";
         import "./app/summary.js";
     </script>
+
 </body>
 </html>
 

@@ -18,14 +18,13 @@ export const sinisterRelics = [
     "Summoning Key" // NEW
 ];
 
-
-
 export const wickedRelics = [
     "Dragon",
     "Bus",
     "Blood Vials",
     "Civil Protector Head",
-    "Golden Spork"
+    "Golden Spork",
+    "Mangler Helmet" // ★ ADDED
 ];
 
 export const allRelics = [
@@ -58,7 +57,8 @@ export const ashesTrailRelics = [
 
 export const paradoxTrailRelics = [
     "Rocket",
-    "Summoning Key" // NEW
+    "Summoning Key",
+    "Mangler Helmet" // ★ ADDED
 ];
 
 /* ===================== FIELD UPGRADES ===================== */
@@ -76,6 +76,7 @@ export const fieldUpgrades = [
 ];
 
 /* ===================== SURVIVAL MAPS ===================== */
+/* These match your actual UI theme files exactly */
 
 export const survivalMaps = [
     "Vandorn Farm",
@@ -111,13 +112,13 @@ export const extremeRelicRange = {
     max: 15
 };
 
-/* ===================== TRAIL RULES ===================== */
+/* ===================== TRAIL RULES (FIXED) ===================== */
+/* These MUST match your map names EXACTLY */
 
 export const trailRules = {
-    grim: {},
-    astra: { pool: astraTrailRelics },
-    ashes: { pool: ashesTrailRelics },
-    paradox: { pool: paradoxTrailRelics } // NEW
+    "Astra": { pool: astraTrailRelics },
+    "Ashes of the Damned": { pool: ashesTrailRelics },
+    "Paradox Junction": { pool: paradoxTrailRelics }
 };
 
 /* ===================== UTILITY HELPERS ===================== */
@@ -146,30 +147,30 @@ export function weightedPick(values, weights) {
     return values[values.length - 1];
 }
 
+/* ===================== RELIC IMAGE FILENAMES ===================== */
+/* These match your actual filenames inside images/relics */
+
 export const relicImages = {
-    "Lawyers Pen": "Lawyers-pen.png",
+    "Lawyers Pen": "Lawyers_pen.png",
     "Gong": "gong.png",
-    "Teddy Bear": "teddy-bear.png",
-    "Dragon Wings": "dragon-wings.png",
+    "Teddy Bear": "teddy_bear.png",
+    "Dragon Wings": "dragon_wings.png",
     "Seed": "seed.png",
     "Rocket": "rocket.png",
-    "Vril Sphere": "vril-sphere.png",
-    "Samantha's Drawing": "samanthas-drawing.png",
-    "Focusing Stone": "focusing-stone.png",
-    "Spider Fang": "spider-fang.png",
-    "Matryoshika Doll": "matryoshika-doll.png",
+
+    "Vril Sphere": "vril_sphere.png",
+    "Samantha's Drawing": "samanthas_drawing.png",
+    "Focusing Stone": "focusing_stone.png",
+    "Spider Fang": "spider_fang.png",
+    "Matryoshika Doll": "matryoshika_doll.png",
+
     "Bus": "bus.png",
     "Dragon": "dragon.png",
-    "Blood Vials": "blood-vials.png",
-    "Civil Protector Head": "civil-head-protector.png",
-    "Golden Spork": "golden-spork.png",
-    "Summoning Key": "summoning-key.png" // NEW
+    "Blood Vials": "blood_vials.png",
+    "Civil Protector Head": "civil_head_protector.png",
+    "Golden Spork": "golden_spork.png",
+
+    "Summoning Key": "summoning_key.png",
+    "Mangler Helmet": "mangler_helmet.png"
 };
-
-
-
-
-
-
-
 

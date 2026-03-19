@@ -18,7 +18,13 @@ export const state = {
     extremeIndex: 0,
 
     stopwatchTime: 0,
-    stopwatchActive: false
+    stopwatchActive: false,
+
+    // ★ Stores the relic the player confirms during Relic Trail
+    selectedTrailRelic: null,
+
+    // ★ NEW — tracks the currently applied map theme
+    activeMapTheme: null
 };
 
 // ===================== DOM HELPER =====================
@@ -52,6 +58,12 @@ export function resetRunState() {
     state.stopwatchTime = 0;
     state.stopwatchActive = false;
 
+    // Reset trail relic confirmation
+    state.selectedTrailRelic = null;
+
+    // ★ Reset active map theme
+    state.activeMapTheme = null;
+
     saveSession();
 }
 
@@ -62,5 +74,7 @@ export function resetSessionStats() {
     state.sessionFails = 0;
     saveSession();
 }
+
+
 
 

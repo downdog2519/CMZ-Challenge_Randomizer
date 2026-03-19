@@ -1,3 +1,7 @@
+/* ============================================================
+   BASE LAYOUT
+============================================================ */
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -25,19 +29,12 @@ body {
     font-size: 20px;
 }
 
-.top-btn {
-    background: #333;
-    color: #f5f5f5;
-    border: 1px solid #555;
-    padding: 6px 12px;
-    cursor: pointer;
-}
-
 .main-layout {
     flex: 1;
     display: flex;
     padding: 10px;
     gap: 10px;
+    align-items: flex-start; /* prevents stretching */
 }
 
 .panel {
@@ -55,16 +52,24 @@ body {
     gap: 10px;
 }
 
+/* ⭐ FIXED RIGHT PANEL */
 .panel-right {
-    width: 60%;
+    flex: 0 1 600px;   /* grows up to 600px */
+    max-width: 800px;  /* hard cap */
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    align-items: center; /* centers challenge content */
+    position: relative;  /* allows top-right button */
 }
 
 .panel-full {
     width: 100%;
 }
+
+/* ============================================================
+   BUTTONS
+============================================================ */
 
 .primary-btn {
     background: #2f7ed8;
@@ -123,6 +128,17 @@ body {
     cursor: pointer;
 }
 
+/* ⭐ RESET BUTTON TOP-RIGHT */
+.reset-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+/* ============================================================
+   GAMERTAGS
+============================================================ */
+
 .gamertag-container {
     display: flex;
     flex-direction: column;
@@ -141,6 +157,10 @@ body {
     background: #111;
     color: #f5f5f5;
 }
+
+/* ============================================================
+   RELIC GRID
+============================================================ */
 
 .relic-columns {
     display: flex;
@@ -175,11 +195,17 @@ body {
     justify-content: center;
     background: #111;
     cursor: pointer;
+    transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.relic-option:hover {
+    border-color: #888;
+    box-shadow: 0 0 6px #888;
 }
 
 .relic-option.selected {
     border-color: #2f7ed8;
-    box-shadow: 0 0 6px #2f7ed8;
+    box-shadow: 0 0 8px #2f7ed8;
 }
 
 .relic-img {
@@ -187,10 +213,18 @@ body {
     max-height: 40px;
 }
 
+/* ============================================================
+   SESSION STATS
+============================================================ */
+
 .session-stats {
     margin-top: 10px;
     font-size: 13px;
 }
+
+/* ============================================================
+   CHALLENGE AREA
+============================================================ */
 
 .challenge-buttons {
     display: flex;
@@ -232,31 +266,37 @@ body {
     display: inline-block;
 }
 
+/* ============================================================
+   SUMMARY PAGE
+============================================================ */
+
 #summaryContent p {
     margin: 4px 0;
 }
 
-/* Divider between panels */
+/* ============================================================
+   DIVIDER
+============================================================ */
+
 .vertical-divider {
     width: 2px;
     background: #333;
     margin: 0 10px;
 }
 
-/* Ensure main layout aligns panels + divider */
-.main-layout {
-    flex: 1;
-    display: flex;
-    padding: 10px;
-    gap: 10px;
-    align-items: stretch;
-}
+/* ============================================================
+   LOCKED PANEL
+============================================================ */
 
 .locked {
     pointer-events: none;
     opacity: 0.35;
     filter: grayscale(40%);
 }
+
+/* ============================================================
+   LOGO + TITLE
+============================================================ */
 
 .title-with-logo {
     display: flex;
@@ -276,11 +316,9 @@ body {
     letter-spacing: 1px;
 }
 
-/* ===== SUMMARY COLOR CODING ===== */
-
-.summary-player {
-    font-weight: bold;
-}
+/* ============================================================
+   COLOR CODING
+============================================================ */
 
 .player1 { color: #00ff00; }
 .player2 { color: #ffff00; }
@@ -295,20 +333,142 @@ body {
 .map-ashes { color: #ff6600; }
 .map-paradox { color: #ff00ff; }
 
-.field-upgrade { color: #ffe600; font-weight: bold; }
+.map-vandorn { color: #8bc34a; }
+.map-exit115 { color: #ff4444; }
+.map-zarya { color: #66ccff; }
+.map-mars { color: #ff9933; }
 
-/* ===================== COLOR CODING ===================== */
+.field-upgrade {
+    color: #ffe600;
+    font-weight: bold;
+}
 
 .relic-title { color: #ff0000; }
 .map-title { color: #0094ff; }
 .field-title { color: #ffe600; }
 
-.relic-grim { color: #9b59b6; }
-.relic-sinister { color: #e67e22; }
-.relic-wicked { color: #c0392b; }
+/* ============================================================
+   MAP THEME PANELS
+============================================================ */
 
-.player1 { color: #00ff00; }
-.player2 { color: #ffff00; }
-.player3 { color: #0094ff; }
-.player4 { color: #ff66cc; }
+#challengeArea {
+    padding: 0;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #000;
+}
+
+/* MAP IMAGES */
+#challengeArea.map-Astra {
+    background-image: url("./images/themes/astra-panel.png");
+}
+
+#challengeArea.map-AshesoftheDamned,
+#challengeArea.map-ashes {
+    background-image: url("./images/themes/ashes-panel.png");
+}
+
+#challengeArea.map-ParadoxJunction {
+    background-image: url("./images/themes/paradox-panel.png");
+}
+
+#challengeArea.map-VandornFarm {
+    background-image: url("./images/themes/vandorn-panel.png");
+}
+
+#challengeArea.map-Exit115 {
+    background-image: url("./images/themes/exit115-panel.png");
+}
+
+#challengeArea.map-ZaryaCosmodrome {
+    background-image: url("./images/themes/zarya-panel.png");
+}
+
+#challengeArea.map-Mars {
+    background-image: url("./images/themes/mars-panel.png");
+}
+
+/* ============================================================
+   CHALLENGE TEXT POSITIONING
+============================================================ */
+
+#result {
+    margin-top: 160px;
+    text-align: center;
+    width: 100%;
+}
+
+/* ============================================================
+   RELIC ICONS (Trail UI)
+============================================================ */
+
+.relic-container {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.relic-icon {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    cursor: pointer;
+    transition: transform 0.15s ease, filter 0.15s ease;
+    filter: grayscale(100%) brightness(0.7);
+}
+
+.relic-icon:hover {
+    filter: grayscale(40%) brightness(1);
+    transform: scale(1.05);
+}
+
+.relic-icon.selected {
+    filter: grayscale(0%) brightness(1.1);
+    transform: scale(1.1);
+}
+
+/* ============================================================
+   CHALK TEXT + BO1 STYLE
+============================================================ */
+
+.chalk-text {
+    font-family: "Courier New", monospace;
+    color: #f2f2f2;
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
+    letter-spacing: 1px;
+}
+
+.cmz-button {
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.65);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-family: "Courier New", monospace;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.cmz-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+}
+
+/* ============================================================
+   UTILITY
+============================================================ */
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
 
