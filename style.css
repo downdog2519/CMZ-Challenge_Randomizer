@@ -47,16 +47,18 @@ body {
 
 .panel-left {
     width: 40%;
+    max-width: 400px;
+    min-width: 260px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    align-items: center;
 }
 
 /* ⭐ FIXED RIGHT PANEL */
 .panel-right {
     flex: 0 1 600px;   /* grows up to 600px */
     max-width: 800px;  /* hard cap */
-    width: 100%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center; /* centers challenge content */
@@ -139,14 +141,42 @@ body {
    GAMERTAGS
 ============================================================ */
 
+#playerCountInput {
+    width: 30px;
+    padding: 4px 6px;
+    border-radius: 3px;
+    border: 1px solid #444;
+    background: #111;
+    color: #f5f5f5;
+    margin-bottom: 5px;
+}
+
+#challengeStageSelect {
+    width: 50px;
+    padding: 4px 6px;
+    border-radius: 3px;
+    border: 1px solid #444;
+    background: #111;
+    color: #f5f5f5;
+}
+
 .gamertag-container {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
+.title-text {
+    color: purple !important;
+}
+
+.player-setup-title {
+    color: #00ff00 !important;
+}
+
 .gamertag-row {
-    display: flex;
+    max-width: 250px;
+
 }
 
 .gamertag-input {

@@ -7,6 +7,34 @@ import {
 } from "./data.js";
 
 /* ============================================================
+   COLOR HELPERS (NEW)
+============================================================ */
+
+function getRelicClass(name) {
+    if (grimRelics.includes(name)) return "relic-grim";
+    if (sinisterRelics.includes(name)) return "relic-sinister";
+    if (wickedRelics.includes(name)) return "relic-wicked";
+    return "";
+}
+
+function getMapClass(map) {
+    if (map === "Astra") return "map-astra";
+    if (map === "Ashes of the Damned") return "map-ashes";
+    if (map === "Paradox Junction") return "map-paradox";
+
+    if (map === "Vandorn Farm") return "map-vandorn";
+    if (map === "Exit 115") return "map-exit115";
+    if (map === "Zarya Cosmodrome") return "map-zarya";
+    if (map === "Mars") return "map-mars";
+
+    return "";
+}
+
+function getPlayerClass(index) {
+    return `player${index + 1}`;
+}
+
+/* ============================================================
    MAP THEME HANDLER
 ============================================================ */
 
@@ -16,15 +44,12 @@ export function applyMapTheme(mapName) {
 
     const className = "map-" + mapName.replace(/\s+/g, "").replace(/'/g, "");
 
-    // FIX: Copy classList first so we don't mutate while iterating
     [...panel.classList].forEach(c => {
         if (c.startsWith("map-")) panel.classList.remove(c);
     });
 
     panel.classList.add(className);
 }
-
-
 
 /* ============================================================
    RENDER GAMERTAG INPUTS
@@ -80,8 +105,6 @@ export function renderRelicOwnership() {
 
         const img = document.createElement("img");
         img.className = "relic-img";
-
-        // FIXED: Correct filename mapping
         img.src = `./images/relics/${relicImages[name]}`;
         img.alt = name;
 
@@ -115,7 +138,7 @@ export function clearChallengePanel() {
 
     const panel = $("challengeArea");
     if (panel) {
-        panel.classList.forEach(c => {
+        [...panel.classList].forEach(c => {
             if (c.startsWith("map-")) panel.classList.remove(c);
         });
     }
@@ -171,7 +194,7 @@ export function renderSummaryData(summary) {
 }
 
 /* ============================================================
-   CHALLENGE RENDERERS
+   CHALLENGE RENDERERS (UPDATED WITH COLORS)
 ============================================================ */
 
 export function renderBossChallenge(data) {
@@ -179,15 +202,32 @@ export function renderBossChallenge(data) {
 
     $("result").innerHTML = `
         <div class="challenge-section-title">Boss Challenge</div>
+
         <div class="challenge-line"><strong>Tier:</strong> ${data.tier}</div>
-        <div class="challenge-line"><strong>Map:</strong> ${data.map}</div>
+
+        <div class="challenge-line"><strong>Map:</strong>
+            <span class="${getMapClass(data.map)}">${data.map}</span>
+        </div>
 
         <div class="challenge-line"><strong>Relics:</strong>
-            ${data.relics.length ? data.relics.join(", ") : "None"}
+            ${
+                data.relics.length
+                    ? data.relics
+                        .map(r => `<span class="${getRelicClass(r)}">${r}</span>`)
+                        .join(", ")
+                    : "None"
+            }
         </div>
 
         <div class="challenge-line"><strong>Field Upgrades:</strong>
-            ${data.fieldUpgrades.map(f => `${f.player}: ${f.upgrade}`).join(", ")}
+            ${
+                data.fieldUpgrades
+                    .map((f, i) =>
+                        `<span class="${getPlayerClass(i)}">${f.player}</span>: ` +
+                        `<span class="field-upgrade">${f.upgrade}</span>`
+                    )
+                    .join(", ")
+            }
         </div>
     `;
 }
@@ -197,15 +237,32 @@ export function renderSurvivalChallenge(data) {
 
     $("result").innerHTML = `
         <div class="challenge-section-title">Survival of the Fit</div>
-        <div class="challenge-line"><strong>Map:</strong> ${data.map}</div>
+
+        <div class="challenge-line"><strong>Map:</strong>
+            <span class="${getMapClass(data.map)}">${data.map}</span>
+        </div>
+
         <div class="challenge-line"><strong>Round:</strong> ${data.round}</div>
 
         <div class="challenge-line"><strong>Relics:</strong>
-            ${data.relics.length ? data.relics.join(", ") : "None"}
+            ${
+                data.relics.length
+                    ? data.relics
+                        .map(r => `<span class="${getRelicClass(r)}">${r}</span>`)
+                        .join(", ")
+                    : "None"
+            }
         </div>
 
         <div class="challenge-line"><strong>Field Upgrades:</strong>
-            ${data.fieldUpgrades.map(f => `${f.player}: ${f.upgrade}`).join(", ")}
+            ${
+                data.fieldUpgrades
+                    .map((f, i) =>
+                        `<span class="${getPlayerClass(i)}">${f.player}</span>: ` +
+                        `<span class="field-upgrade">${f.upgrade}</span>`
+                    )
+                    .join(", ")
+            }
         </div>
     `;
 }
@@ -215,13 +272,44 @@ export function renderTrailChallenge(data) {
 
     $("result").innerHTML = `
         <div class="challenge-section-title">Relic Trail</div>
-        <div class="challenge-line"><strong>Map:</strong> ${data.map}</div>
+
+        <div class="challenge-line"><strong>Map:</strong>
+            <span class="${getMapClass(data.map)}">${data.map}</span>
+        </div>
 
         <div class="challenge-line"><strong>Required Relic:</strong>
-            ${data.requiredRelic}
+            <span class="${getRelicClass(data.requiredRelic)}">${data.requiredRelic}</span>
         </div>
     `;
 }
 
+export function renderStartingRoomChallenge(data) {
+    applyMapTheme(data.map);
 
+    $("result").innerHTML = `
+        <div class="challenge-section-title">Starting Room</div>
+
+        <div class="challenge-line"><strong>Map:</strong>
+            <span class="${getMapClass(data.map)}">${data.map}</span>
+        </div>
+
+        <div class="challenge-line"><strong>Round:</strong> ${data.round}</div>
+    `;
+}
+
+/* ============================================================
+   RESTORE UI ELEMENTS
+============================================================ */
+
+export function renderChallengeStageSelect() {
+    const el = $("challengeStageSelect");
+    if (!el) return;
+    el.value = state.challengeStageCount;
+}
+
+export function renderPlayerCountInput() {
+    const el = $("playerCountInput");
+    if (!el) return;
+    el.value = state.playerCount;
+}
 

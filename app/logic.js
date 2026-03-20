@@ -19,10 +19,21 @@ import {
     renderBossChallenge,
     renderSurvivalChallenge,
     renderTrailChallenge,
+    renderStartingRoomChallenge,
     renderStopwatch,
     clearChallengePanel,
     applyMapTheme
 } from "./ui.js";
+
+/* ============================================================
+   STARTING ROOM ROUND WEIGHTS (NEW)
+============================================================ */
+
+const startingRoomRounds = [11, 16, 21, 26, 31, 36, 41, 46, 51];
+
+const startingRoomWeightsStandard = [45, 60, 65, 70, 50, 33, 21, 18, 5];
+
+const startingRoomWeightsExtreme = [15, 18, 23, 28, 34, 45, 48, 52, 35];
 
 /* ============================================================
    PLAYER CONFIRMATION
@@ -38,7 +49,6 @@ export function confirmPlayers() {
         }
     }
 
-    // Prevent Extreme mode with 0 relics
     if (state.challengeModeType === "extreme" && state.unlockedRelics.length === 0) {
         alert("You must unlock at least one relic before starting Extreme mode.");
         return false;
@@ -208,17 +218,10 @@ export function generateStandardTrail() {
 
     applyMapTheme(map);
 
-    let requiredRelic = null;
-
-    if (map === "Astra") {
-        requiredRelic = pickRandom(trailRules["Astra"].pool);
-    }
-    if (map === "Ashes of the Damned") {
-        requiredRelic = pickRandom(trailRules["Ashes of the Damned"].pool);
-    }
-    if (map === "Paradox Junction") {
-        requiredRelic = pickRandom(trailRules["Paradox Junction"].pool);
-    }
+    // FIX: Only pick unowned relics unless all are owned
+    const pool = trailRules[map].pool;
+    const unowned = pool.filter(r => !state.unlockedRelics.includes(r));
+    const requiredRelic = pickRandom(unowned.length ? unowned : pool);
 
     const data = {
         map,
@@ -227,6 +230,29 @@ export function generateStandardTrail() {
     };
 
     renderTrailChallenge(data);
+    return data;
+}
+
+/* ============================================================
+   STARTING ROOM — STANDARD MODE (UPDATED WEIGHTS)
+============================================================ */
+
+export function generateStandardStartingRoom() {
+    const maps = ["Astra", "Ashes of the Damned"];
+    const map = pickRandom(maps);
+
+    applyMapTheme(map);
+
+    const round = weightedPick(startingRoomRounds, startingRoomWeightsStandard);
+
+    const data = {
+        map,
+        round,
+        relics: [],
+        fieldUpgrades: []
+    };
+
+    renderStartingRoomChallenge(data);
     return data;
 }
 
@@ -314,17 +340,10 @@ export function generateExtremeTrail() {
 
     applyMapTheme(map);
 
-    let requiredRelic = null;
-
-    if (map === "Astra") {
-        requiredRelic = pickRandom(trailRules["Astra"].pool);
-    }
-    if (map === "Ashes of the Damned") {
-        requiredRelic = pickRandom(trailRules["Ashes of the Damned"].pool);
-    }
-    if (map === "Paradox Junction") {
-        requiredRelic = pickRandom(trailRules["Paradox Junction"].pool);
-    }
+    // FIX: Only pick unowned relics unless all are owned
+    const pool = trailRules[map].pool;
+    const unowned = pool.filter(r => !state.unlockedRelics.includes(r));
+    const requiredRelic = pickRandom(unowned.length ? unowned : pool);
 
     const data = {
         map,
@@ -333,6 +352,29 @@ export function generateExtremeTrail() {
     };
 
     renderTrailChallenge(data);
+    return data;
+}
+
+/* ============================================================
+   STARTING ROOM — EXTREME MODE (UPDATED WEIGHTS)
+============================================================ */
+
+export function generateExtremeStartingRoom() {
+    const maps = ["Astra", "Ashes of the Damned"];
+    const map = pickRandom(maps);
+
+    applyMapTheme(map);
+
+    const round = weightedPick(startingRoomRounds, startingRoomWeightsExtreme);
+
+    const data = {
+        map,
+        round,
+        relics: [],
+        fieldUpgrades: []
+    };
+
+    renderStartingRoomChallenge(data);
     return data;
 }
 
@@ -375,7 +417,7 @@ export function generateChallenge(type) {
     clearChallengePanel();
     resetStopwatch();
 
-    if (state.currentRun.length >= 3) return;
+    if (state.currentRun.length >= state.challengeStageCount) return;
 
     state.currentChallengeType = type;
     state.currentMode = state.challengeModeType;
@@ -386,10 +428,12 @@ export function generateChallenge(type) {
         if (type === "boss") data = generateStandardBoss();
         if (type === "survival") data = generateStandardSurvival();
         if (type === "trail") data = generateStandardTrail();
+        if (type === "starting") data = generateStandardStartingRoom();
     } else {
         if (type === "boss") data = generateExtremeBoss();
         if (type === "survival") data = generateExtremeSurvival();
         if (type === "trail") data = generateExtremeTrail();
+        if (type === "starting") data = generateExtremeStartingRoom();
     }
 
     const packaged = {
@@ -399,7 +443,6 @@ export function generateChallenge(type) {
         timeSeconds: 0
     };
 
-    // Duplicate checking only in Standard mode
     if (state.challengeModeType === "standard" && isDuplicateChallenge(packaged)) {
         return generateChallenge(type);
     }
@@ -407,10 +450,12 @@ export function generateChallenge(type) {
     state.currentRun.push(packaged);
     saveSession();
 
+    // FIX: Hide Starting Room button after selection
     if (state.challengeModeType === "standard") {
         if (type === "boss") $("bossBtn").style.display = "none";
         if (type === "survival") $("survivalBtn").style.display = "none";
         if (type === "trail") $("trailBtn").style.display = "none";
+        if (type === "starting") $("startingBtn").style.display = "none"; // NEW
     }
 
     const beginBtn = $("beginBtn");
@@ -426,7 +471,7 @@ export function generateChallenge(type) {
 ============================================================ */
 
 export function setupExtremeQueue() {
-    state.extremeQueue = ["boss", "survival", "trail"];
+    state.extremeQueue = ["boss", "survival", "trail", "starting"];
     for (let i = state.extremeQueue.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [state.extremeQueue[i], state.extremeQueue[j]] = [state.extremeQueue[j], state.extremeQueue[i]];
@@ -470,7 +515,7 @@ export function markPass() {
         passFail.style.display = "none";
     }
 
-    if (state.currentRun.length === 3) {
+    if (state.currentRun.length >= state.challengeStageCount) {
         finishRun();
         return;
     }
@@ -479,6 +524,11 @@ export function markPass() {
         state.extremeIndex++;
 
         resetStopwatch();
+
+        if (state.currentRun.length >= state.challengeStageCount) {
+            finishRun();
+            return;
+        }
 
         if (state.extremeIndex < state.extremeQueue.length) {
             generateNextExtremeChallenge();
@@ -495,7 +545,7 @@ export function markFail() {
     const setup = $("setupContainer");
     const area = $("challengeArea");
     if (setup && area) {
-        setup.classList.remove("locked");   // unlock setup
+        setup.classList.remove("locked");
         setup.style.display = "block";
         area.style.display = "none";
     }

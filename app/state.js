@@ -10,6 +10,7 @@ export const state = {
     unlockedRelics: [],
 
     challengeModeType: "standard", // "standard" | "extreme"
+    challengeStageCount: 2, // NEW — number of challenges (2,3,4)
 
     currentRun: [],
     currentMode: null,
@@ -73,6 +74,20 @@ export function resetSessionStats() {
     state.sessionWins = 0;
     state.sessionFails = 0;
     saveSession();
+}
+
+export function setChallengeStageCount(value) {
+    state.challengeStageCount = Number(value);
+    saveSession();
+}
+
+export function setPlayerCount(value) {
+    const num = Number(value);
+    if (num >= 1 && num <= 4) {
+        state.playerCount = num;
+        state.gamertags.length = num;
+        saveSession();
+    }
 }
 
 

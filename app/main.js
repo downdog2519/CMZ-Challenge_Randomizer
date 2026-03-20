@@ -1,11 +1,13 @@
-import { $, state, saveSession, resetSessionStats } from "./state.js";
+import { $, state, saveSession, resetSessionStats, setPlayerCount, setChallengeStageCount } from "./state.js";
 import {
     renderGamertagInputs,
     renderRelicOwnership,
     updateSessionStats,
     updateModeLabel,
     renderSummaryData,
-    renderStopwatch
+    renderStopwatch,
+    renderChallengeStageSelect,
+    renderPlayerCountInput
 } from "./ui.js";
 import {
     toggleMode,
@@ -31,6 +33,8 @@ window.addEventListener("DOMContentLoaded", () => {
     updateSessionStats();
     updateModeLabel();
     renderStopwatch();
+    renderChallengeStageSelect();
+    renderPlayerCountInput();
 
     if (state.playerCount > 1 && $("gamertagInputs")) {
         $("gamertagInputs").style.display = "block";
@@ -50,21 +54,20 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 /* ============================================================
-   PLAYER COUNT TOGGLE
+   PLAYER COUNT INPUT
 ============================================================ */
 
-$("playerToggleBtn")?.addEventListener("click", () => {
-    let count = state.playerCount + 1;
-    if (count > 4) count = 1;
-
-    state.playerCount = count;
-    state.gamertags.length = count;
-
-    $("playerToggleBtn").textContent =
-        count === 1 ? "Player Count: Solo" : `Player Count: ${count}`;
-
+$("playerCountInput")?.addEventListener("input", () => {
+    setPlayerCount($("playerCountInput").value);
     renderGamertagInputs();
-    saveSession();
+});
+
+/* ============================================================
+   CHALLENGE STAGE SELECT
+============================================================ */
+
+$("challengeStageSelect")?.addEventListener("change", () => {
+    setChallengeStageCount($("challengeStageSelect").value);
 });
 
 /* ============================================================
@@ -83,7 +86,7 @@ $("modeToggleBtn")?.addEventListener("click", () => {
 $("confirmPlayersBtn")?.addEventListener("click", () => {
     if (!confirmPlayers()) return;
 
-    // NEW: Lock setup instead of hiding it
+    // Lock setup instead of hiding it
     $("setupContainer").classList.add("locked");
 
     // Show challenge panel on the right
@@ -130,6 +133,12 @@ $("trailBtn")?.addEventListener("click", () => {
     generateChallenge("trail");
 });
 
+$("startingBtn")?.addEventListener("click", () => {
+    if (state.challengeModeType !== "standard") return;
+    if (state.currentRun.some(c => c.type === "starting")) return;
+    generateChallenge("starting");
+});
+
 /* ============================================================
    BEGIN / PASS / FAIL
 ============================================================ */
@@ -164,7 +173,7 @@ $("newChallengeBtn")?.addEventListener("click", () => {
     resetRun();
     $("result").innerHTML = "";
 
-    // NEW: Unlock setup again
+    // Unlock setup again
     $("setupContainer").classList.remove("locked");
 
     // Hide challenge area again
@@ -182,6 +191,4 @@ $("resetSessionBtn")?.addEventListener("click", () => {
     resetSessionStats();
     updateSessionStats();
 });
-
-
 

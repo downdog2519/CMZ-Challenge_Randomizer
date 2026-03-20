@@ -14,7 +14,7 @@
         <header class="top-bar">
             <div class="title-with-logo">
                 <img src="./images/cmz.png" alt="CMZ Logo" class="cmz-logo">
-                <span class="title-text">Challenge Generator</span>
+                <span class="title-text" style="color: purple;">Challenge Randomizer</span>
             </div>
         </header>
 
@@ -22,14 +22,24 @@
 
             <!-- LEFT PANEL (SETUP) -->
             <section id="setupContainer" class="panel panel-left">
-                <h2>Setup</h2>
+                <h2 style="color: #00ff00;">Player Setup</h2>
 
                 <button id="modeToggleBtn" class="wide-btn">Mode: Standard Challenges</button>
-                <button id="playerToggleBtn" class="wide-btn">Player Count: Solo</button>
+
+                <label style="margin-top: 10px;">Challenge Stages:<p style="font-size: 10px;">(select x stages you desire)</p></label>
+                <select id="challengeStageSelect" class="gamertag-input">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                </select>
+
+                <label style="margin-top: 5px;">Player Count:<p style="font-size: 10px;">(select x amount of players)</p></label>
+                <input id="playerCountInput" type="number" min="1" max="4" value="1" class="gamertag-input">
+
 
                 <div id="gamertagInputs" class="gamertag-container"></div>
 
-                <h3>Relic Ownership</h3>
+                <h3>Relic Ownership:<p style="font-size: 10px;">(select your relics)</p></h3>
                 <div class="relic-columns">
                     <div id="grimColumn" class="relic-column"></div>
                     <div id="sinisterColumn" class="relic-column"></div>
@@ -57,10 +67,13 @@
                 <h2>Current Challenge</h2>
 
                 <div id="challengeButtons" class="challenge-buttons">
-                    <button id="bossBtn" class="primary-btn">Boss Challenge</button>
-                    <button id="survivalBtn" class="primary-btn">Survival of the Fit</button>
-                    <button id="trailBtn" class="primary-btn">Relic Trail</button>
-                </div>
+                <button id="bossBtn" class="primary-btn">Boss Challenge</button>
+                <button id="survivalBtn" class="primary-btn">Survival of the Fit</button>
+                <button id="trailBtn" class="primary-btn">Relic Trail</button>
+                <button id="startingBtn" class="primary-btn">Starting Room</button>
+            </div>
+
+
 
                 <div id="result" class="challenge-result"></div>
 
