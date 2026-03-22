@@ -1,0 +1,139 @@
+/* ============================================================
+   LAYOUT.CSS — Structural Layout + BO7 Panel Framework
+   ============================================================ */
+
+/* ---------- APP CONTAINER ---------- */
+#appContainer {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden; /* fog layer sits above */
+}
+
+/* ---------- TOP BAR ---------- */
+.top-bar {
+    height: 64px;
+
+    background:
+        linear-gradient(to bottom, rgba(255,255,255,0.03), rgba(0,0,0,0.25)),
+        url("../images/themes/Challenge-Generator.png");
+    background-size: cover;
+    background-blend-mode: overlay;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 12px;
+    position: relative;
+    box-shadow: 0 0 12px rgba(0,0,0,0.6);
+}
+
+.topbar-banner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-grow: 1;
+    padding-left: 0; /* Fixed broken value */
+}
+
+.cmz-banner {
+    transform: scaleX(1.40); /* 1.05 = subtle, 1.15 = noticeable */
+    transform-origin: left center;
+}
+
+/* ---------- MAIN LAYOUT ---------- */
+.main-layout {
+    flex: 1;
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    overflow: hidden;
+}
+
+/* ---------- PANELS ---------- */
+.panel {
+    background: var(--bo7-panel-dark);
+    border: 1px solid var(--bo7-border);
+    border-radius: 6px;
+    padding: 14px;
+    box-shadow: 0 0 14px rgba(0, 0, 0, 0.7);
+    position: relative;
+}
+
+/* Left panel (setup) */
+.panel-left {
+    width: 40%;
+    min-width: 260px;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Right panel (challenge area) */
+.panel-right {
+    aspect-ratio: 16 / 9; /* or 4/3 depending on your map art */
+    height: auto;
+    width: 100%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Full-width panel (summary page) */
+.panel-full {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+/* ---------- DIVIDER ---------- */
+.vertical-divider {
+    width: 2px;
+    background: #1a1a22;
+    border-left: 1px solid #2a2a33;
+    border-right: 1px solid #0a0a0f;
+    margin: 0 6px;
+}
+
+/* ---------- LOCKED STATE ---------- */
+.locked {
+    pointer-events: none;
+    opacity: 0.35;
+    filter: grayscale(40%);
+}
+
+#result.challenge-result {
+    margin-top: 230px; /* adjust this value if you want it lower */
+}
+
+/* Allow absolute-positioned timer inside challenge panel */
+#challengeArea {
+    position: relative;
+}
+
+/* When left panel is removed */
+.main-layout.full-right .panel-left {
+    display: none;
+}
+
+.main-layout.full-right .panel-right {
+    width: 100% !important;
+    max-width: none !important;
+}
+
+.main-layout.full-right {
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+

@@ -1,0 +1,295 @@
+/* ============================================================
+   THEME-BO7.CSS — Neon, Metal, Fog, Chalk Text, BO7 Identity
+   ============================================================ */
+
+/* ============================================================
+   METAL PANEL TEXTURES (MEDIUM INTENSITY)
+   ============================================================ */
+
+.panel,
+.panel-left,
+.panel-right,
+.panel-full {
+    background: 
+        linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.03),
+            rgba(0, 0, 0, 0.25)
+        ),
+        url("../images/themes/metal-medium.png");
+    background-size: cover;
+    background-blend-mode: overlay;
+    border: 1px solid var(--bo7-border);
+    box-shadow:
+        inset 0 0 18px rgba(0, 0, 0, 0.6),
+        0 0 14px rgba(0, 0, 0, 0.8);
+}
+
+/* ============================================================
+   TOP BAR — BO7 HEADER STRIP
+   ============================================================ */
+
+.top-bar {
+    height: 64px;
+
+    background:
+        linear-gradient(to bottom, rgba(255,255,255,0.03), rgba(0,0,0,0.25)),
+        url("../images/themes/metal-medium.png");
+    background-size: cover;
+    background-blend-mode: overlay;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 12px;
+    position: relative;
+    box-shadow: 0 0 12px rgba(0,0,0,0.6);
+}
+
+.topbar-banner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-grow: 1;
+    padding-left: 0; /* Fixed broken value */
+}
+
+.cmz-banner {
+    height: 100%;        /* fills the top bar vertically */
+    width: auto;         /* keeps proportions */
+    max-width: none;     /* allows stretching wider */
+    object-fit: contain;
+
+    opacity: 0.95;
+    mix-blend-mode: lighten;
+}
+
+.topbar-banner::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    height: 64px;
+    width: 40%;
+    background: linear-gradient(to right, rgba(0,0,0,0.35), transparent);
+    pointer-events: none;
+}
+
+/* ============================================================
+   CHALK TEXT STYLE (BO1 MENU VIBES)
+   ============================================================ */
+
+.chalk-text {
+    font-family: "Courier New", monospace;
+    color: var(--bo7-text-light);
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+    letter-spacing: 1px;
+}
+
+/* ============================================================
+   CHALLENGE PANEL — NEON FRAME + DEPTH
+   ============================================================ */
+
+#challengeArea {
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,0.25),
+            rgba(0,0,0,0.55)
+        ),
+        url("../images/themes/metal-panel.png");
+    background-size: cover;
+    background-blend-mode: overlay;
+}
+
+/* Electric edge highlight */
+#challengeArea::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(0, 200, 255, 0.15);
+    pointer-events: none;
+    box-shadow: 0 0 22px rgba(0, 200, 255, 0.15);
+    z-index: 1;
+}
+
+/* ============================================================
+   FOG LAYER INTEGRATION
+   ============================================================ */
+
+#challengeArea .fog-layer {
+    z-index: 3; /* above vignette, below UI */
+}
+
+/* ============================================================
+   BUTTON ENHANCEMENTS — ELECTRIC EDGES
+   ============================================================ */
+
+button {
+    position: relative;
+    overflow: hidden;
+}
+
+/* subtle electric edge shimmer */
+button::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    pointer-events: none;
+    box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.05);
+}
+
+/* ============================================================
+   CHALLENGE RESULT PANEL — BO7 BRIEFING LOOK
+   ============================================================ */
+
+.challenge-result {
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.02),
+            rgba(0, 0, 0, 0.35)
+        ),
+        url("../images/themes/metal-medium.png");
+    background-size: cover;
+    background-blend-mode: overlay;
+    border: 1px solid rgba(125, 44, 255, 0.25);
+    box-shadow:
+        inset 0 0 18px rgba(0, 0, 0, 0.7),
+        0 0 14px rgba(125, 44, 255, 0.25);
+}
+
+/* Challenge title glow */
+.challenge-section-title {
+    font-family: "Courier New", monospace;
+    animation: neon-pulse-purple 3s ease-in-out infinite;
+}
+
+/* ============================================================
+   SUMMARY PAGE — CLEAN BO7 PANEL
+   ============================================================ */
+
+#summaryContent {
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.02),
+            rgba(0, 0, 0, 0.35)
+        ),
+        url("../images/themes/metal-medium.png");
+    background-size: cover;
+    background-blend-mode: overlay;
+    padding: 20px;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 200, 255, 0.25);
+    box-shadow:
+        inset 0 0 18px rgba(0, 0, 0, 0.7),
+        0 0 14px rgba(0, 200, 255, 0.25);
+}
+
+/* ============================================================
+   GAMERTAG INPUTS — NEON FOCUS
+   ============================================================ */
+
+.gamertag-input:focus {
+    border-color: var(--bo7-purple);
+    box-shadow: var(--bo7-glow-purple);
+}
+
+/* ============================================================
+   PLAYER COLORS — BOOSTED NEON
+   ============================================================ */
+
+.player1 { color: #00ff00; text-shadow: 0 0 6px rgba(0,255,0,0.6); }
+.player2 { color: #ffff00; text-shadow: 0 0 6px rgba(255,255,0,0.6); }
+.player3 { color: #0094ff; text-shadow: 0 0 6px rgba(0,148,255,0.6); }
+.player4 { color: #ff66cc; text-shadow: 0 0 6px rgba(255,102,204,0.6); }
+
+#result.challenge-result {
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.65),
+            rgba(0, 0, 0, 0.85)
+        ),
+        url("../images/themes/metal-medium.png");
+    background-size: cover;
+    background-blend-mode: overlay;
+}
+
+/* Stopwatch Reposition + Red Digits + Border */
+
+#stopwatchTimer {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+
+    /* Red BO1/BO7 glow digits */
+    color: #ff3b3b;
+    text-shadow: 0 0 8px rgba(255, 0, 0, 0.7);
+
+    /* Panel styling */
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.55),
+            rgba(0, 0, 0, 0.85)
+        ),
+        url("../images/themes/metal-medium.png");
+    background-size: cover;
+    background-blend-mode: overlay;
+
+    padding: 8px 14px;
+    border: 1px solid rgba(255, 0, 0, 0.35);
+    border-radius: 4px;
+
+    box-shadow:
+        inset 0 0 12px rgba(0, 0, 0, 0.7),
+        0 0 12px rgba(255, 0, 0, 0.25);
+
+    font-size: 1.4rem;
+    font-family: "Courier New", monospace;
+    z-index: 20; /* above fog, below UI buttons */
+}
+
+/* ============================================================
+   BO7 Confirmation Modal
+   ============================================================ */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    backdrop-filter: blur(3px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-box {
+    width: 420px;
+    padding: 20px;
+    text-align: center;
+    border-radius: 6px;
+    box-shadow: 0 0 18px rgba(0,0,0,0.8);
+}
+
+.modal-title {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+}
+
+.modal-message {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}

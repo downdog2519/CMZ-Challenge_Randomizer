@@ -1,0 +1,426 @@
+/* ============================================================
+   COMPONENTS.CSS — Buttons, Inputs, Tiles, Challenge UI
+   ============================================================ */
+
+/* ---------- BUTTON BASE ---------- */
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    transition: 0.15s ease;
+    padding: 10px 16px;
+    color: var(--bo7-text-light);
+    background: #11131a;
+}
+
+/* ---------- PRIMARY BUTTON (PURPLE GLOW) ---------- */
+.primary-btn {
+    border: 1px solid var(--bo7-purple);
+    box-shadow: var(--bo7-glow-purple);
+}
+
+.primary-btn:hover {
+    background: rgba(125, 44, 255, 0.15);
+    box-shadow: 0 0 18px rgba(125, 44, 255, 0.85);
+    transform: scale(1.03);
+}
+
+/* ---------- SECONDARY BUTTON (BLUE GLOW) ---------- */
+.secondary-btn {
+    border: 1px solid var(--bo7-blue);
+    box-shadow: var(--bo7-glow-blue);
+}
+
+.secondary-btn:hover {
+    background: rgba(0, 200, 255, 0.15);
+    box-shadow: 0 0 18px rgba(0, 200, 255, 0.85);
+    transform: scale(1.03);
+}
+
+/* ---------- WIDE BUTTON ---------- */
+.wide-btn {
+    width: 100%;
+    border: 1px solid var(--bo7-blue);
+    box-shadow: var(--bo7-glow-blue);
+}
+
+.wide-btn:hover {
+    background: rgba(0, 200, 255, 0.15);
+    transform: scale(1.02);
+}
+
+/* ---------- SMALL BUTTON ---------- */
+.small-btn {
+    padding: 6px 10px;
+    font-size: 13px;
+    border: 1px solid var(--bo7-blue);
+    box-shadow: var(--bo7-glow-blue);
+}
+
+.small-btn:hover {
+    background: rgba(0, 200, 255, 0.15);
+}
+
+/* ---------- PASS / FAIL BUTTONS ---------- */
+.pass-btn {
+    background: rgba(0, 255, 0, 0.18); /* stronger green fill */
+    border: 1px solid rgba(0, 255, 0, 0.45);
+    color: #00ff00;
+
+    text-shadow: 0 0 8px rgba(0, 255, 0, 0.7);
+    box-shadow:
+        inset 0 0 12px rgba(0, 255, 0, 0.25),
+        0 0 12px rgba(0, 255, 0, 0.35);
+
+    transition: 0.15s ease;
+}
+
+.pass-btn:hover {
+    background: rgba(0, 255, 0, 0.28);
+    box-shadow:
+        inset 0 0 16px rgba(0, 255, 0, 0.35),
+        0 0 16px rgba(0, 255, 0, 0.45);
+}
+
+.fail-btn {
+    background: rgba(255, 0, 0, 0.18); /* stronger red fill */
+    border: 1px solid rgba(255, 0, 0, 0.45);
+    color: #ff3b3b;
+
+    text-shadow: 0 0 8px rgba(255, 0, 0, 0.7);
+    box-shadow:
+        inset 0 0 12px rgba(255, 0, 0, 0.25),
+        0 0 12px rgba(255, 0, 0, 0.35);
+
+    transition: 0.15s ease;
+}
+
+.fail-btn:hover {
+    background: rgba(255, 0, 0, 0.28);
+    box-shadow:
+        inset 0 0 16px rgba(255, 0, 0, 0.35),
+        0 0 16px rgba(255, 0, 0, 0.45);
+}
+
+/* ---------- RESET BUTTON (TOP RIGHT) ---------- */
+.reset-btn {
+    position: absolute;
+    top: 18px;
+    right: 90px;
+    z-index: 10;
+}
+
+/* ============================================================
+   INPUTS
+   ============================================================ */
+
+input,
+select {
+    background: #0c0d11;
+    border: 1px solid var(--bo7-border);
+    color: var(--bo7-text-light);
+    padding: 6px 8px;
+    border-radius: 4px;
+    outline: none;
+    transition: 0.15s ease;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--bo7-purple);
+    box-shadow: var(--bo7-glow-purple);
+}
+
+/* ============================================================
+   RELIC TILES
+   ============================================================ */
+
+.relic-option {
+    width: 52px;
+    height: 52px;
+    background: #0d0e13;
+    border: 1px solid var(--bo7-border);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.15s ease;
+    cursor: pointer;
+}
+
+.relic-option:hover {
+    border-color: var(--bo7-blue);
+    box-shadow: var(--bo7-glow-blue);
+}
+
+.relic-option.selected {
+    border-color: var(--bo7-purple);
+    box-shadow: var(--bo7-glow-purple);
+}
+
+.relic-img {
+    max-width: 42px;
+    max-height: 42px;
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2));
+}
+
+/* ============================================================
+   CHALLENGE RESULT BOX
+   ============================================================ */
+
+.challenge-result {
+    width: 100%;
+    min-height: 200px;
+    background: #0b0c10;
+    border: 1px solid var(--bo7-border);
+    border-radius: 6px;
+    padding: 14px;
+    margin-top: 20px;
+    overflow-y: auto;
+    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.6);
+}
+
+/* Challenge section title */
+.challenge-section-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--bo7-purple);
+    text-shadow: var(--bo7-glow-purple);
+    margin-bottom: 8px;
+}
+
+/* Challenge lines */
+.challenge-line {
+    font-size: 15px;
+    margin-bottom: 6px;
+}
+
+/* ============================================================
+   STOPWATCH
+   ============================================================ */
+
+.stopwatch {
+    margin-top: 10px;
+    font-size: 16px;
+    color: var(--bo7-blue);
+    text-shadow: var(--bo7-glow-blue);
+}
+
+/* ============================================================
+   CONTROL ROW
+   ============================================================ */
+
+.control-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+/* ============================================================
+   SESSION STATS
+   ============================================================ */
+
+.session-stats {
+    margin-top: 10px;
+    font-size: 14px;
+    color: var(--bo7-text-dim);
+}
+
+.session-stats strong {
+    color: var(--bo7-text-light);
+}
+
+/* ============================================================
+   SUMMARY PAGE — CLEAN BORDERED BOXES + COLOR PILL TAGS
+   ============================================================ */
+
+/* Container for all stages */
+.summary-stage-list {
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    /* Left alignment */
+    max-width: 520px;
+    width: calc(100% - 32px);
+    margin-left: 16px;
+    margin-right: 0;
+}
+
+.summary-info {
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+    max-width: 520px;
+    width: calc(100% - 32px);
+    margin-left: 16px;
+    margin-right: 0;
+}
+
+.summary-stage-box {
+    border: 2px solid rgba(255,255,255,0.15);
+    background: rgba(0,0,0,0.35);
+    padding: 14px;
+    border-radius: 6px;
+    box-shadow: inset 0 0 12px rgba(0,0,0,0.5);
+
+    /* NEW: prevent stretching */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Each challenge box */
+.summary-stage-box {
+    border: 2px solid rgba(255,255,255,0.12);
+    background: rgba(0,0,0,0.75);
+    padding: 14px;
+    border-radius: 6px;
+    box-shadow: inset 0 0 12px rgba(0,0,0,0.5);
+}
+
+/* Stage header */
+.summary-stage-header {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: var(--bo7-blue);
+    text-shadow: var(--bo7-glow-blue);
+}
+
+/* Pills for relics + upgrades */
+.summary-pill {
+    display: inline-block;
+    padding: 3px 8px;
+    margin: 2px 4px 2px 0;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* Field upgrade pill */
+.field-pill {
+    background: rgba(0, 180, 255, 0.25);
+    border: 1px solid rgba(0, 180, 255, 0.5);
+    color: #9bdcff;
+}
+
+/* Optional: spacing for summary info section */
+.summary-info {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+/* ============================================================
+   PLAYER PANELS — COLOUR CODING
+   ============================================================ */
+
+.player-panel {
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    background: rgba(0,0,0,0.45);
+    border-radius: 4px;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Player identity colours */
+.player1 { border-left: 4px solid #4da6ff; }   /* Blue */
+.player2 { border-left: 4px solid #ff4d4d; }   /* Red */
+.player3 { border-left: 4px solid #4dff88; }   /* Green */
+.player4 { border-left: 4px solid #ffe14d; }   /* Yellow */
+.player5 { border-left: 4px solid #b84dff; }   /* Purple */
+.player6 { border-left: 4px solid #ff7f27; }   /* Orange */
+
+.player-name {
+    font-weight: bold;
+    color: #fff;
+}
+
+.player-upgrade {
+    color: #ddd;
+}
+
+/* ============================================================
+   READABILITY BACKDROP FOR CHALLENGE TEXT
+   ============================================================ */
+
+/* ============================================================
+   READABILITY BACKDROP FOR CHALLENGE TEXT — FIXED + POLISHED
+   ============================================================ */
+
+#result {
+    background: rgba(0, 0, 0, 0.55);
+    padding: 18px 22px;
+    border-radius: 6px;
+    backdrop-filter: blur(3px);
+    position: relative;
+    z-index: 5;
+
+    /* NEW: prevent stretching */
+    max-width: 520px;        /* adjust to taste */
+    width: calc(100% - 32px); /* keeps margin breathing room */
+
+    /* NEW: center the box */
+    margin: 16px auto;
+
+    /* BO1-style depth */
+    box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.7);
+}
+
+#result {
+    transition: background 0.25s ease, backdrop-filter 0.25s ease;
+}
+
+/* ============================================================
+   SUMMARY PAGE — LEFT-ALIGNED BUTTON BAR
+   ============================================================ */
+
+.summary-topbar {
+    position: relative;
+    width: 100%;
+    height: 60px;
+
+    display: flex;
+    justify-content: flex-start; /* left aligned */
+    align-items: center;
+    gap: 12px; /* space between buttons */
+
+    padding-left: 16px;
+    padding-right: 16px;
+    box-sizing: border-box;
+
+    z-index: 20;
+}
+
+/* Shared neon-blue button style */
+.summary-btn {
+    padding: 10px 18px;
+    font-size: 15px;
+    border-radius: 4px;
+
+    color: var(--bo7-text-light);
+    background: rgba(0, 0, 0, 0.4);
+
+    border: 1px solid var(--bo7-blue);
+    box-shadow: 0 0 12px rgba(0, 200, 255, 0.6);
+
+    transition: 0.15s ease;
+}
+
+.summary-btn:hover {
+    background: rgba(0, 200, 255, 0.15);
+    box-shadow: 0 0 18px rgba(0, 200, 255, 0.9);
+    transform: scale(1.03);
+}
+
+/* Ensure summary content sits below the buttons */
+.summary-content {
+    padding-top: 70px;
+}
+

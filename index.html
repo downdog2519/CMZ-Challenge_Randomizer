@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CMZ Challenge Generator</title>
+
+    <!-- CSS LAYER (Modular + BO7 Theme) -->
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/layout.css">
+    <link rel="stylesheet" href="./css/components.css">
+    <link rel="stylesheet" href="./css/maps.css">
+    <link rel="stylesheet" href="./css/relics.css">
+    <link rel="stylesheet" href="./css/animations.css">
+    <link rel="stylesheet" href="./css/theme-bo7.css">
+</head>
+
+<body>
+
+<div id="appContainer">
+
+    <!-- ===================== TOP BAR ===================== -->
+<header class="top-bar">
+    <div class="topbar-banner">
+        <img src="./images/themes/Challenge-Generator.png" class="cmz-banner" alt="CMZ Banner">
+    </div>
+
+   <button id="settingsBtn" class="secondary-btn small-btn">Settings</button>
+   <button id="resetSessionBtn" class="secondary-btn small-btn reset-btn">
+        Reset Session
+    </button>
+</header>
+
+    <!-- ===================== MAIN LAYOUT ===================== -->
+    <main class="main-layout">
+
+        <!-- ===================== LEFT PANEL (SETUP) ===================== -->
+        <section id="setupContainer" class="panel panel-left">
+
+            <!-- Player Count -->
+            <label>Players:</label>
+            <select id="playerCountInput">
+                <option value="1">Solo</option>
+                <option value="2">2 Players</option>
+                <option value="3">3 Players</option>
+                <option value="4">4 Players</option>
+            </select>
+
+            <!-- Gamertags -->
+            <div id="gamertagInputs"></div>
+
+            <!-- Relic Ownership -->
+            <h3 class="chalk-text">Unlocked Relics</h3>
+            <div class="relic-columns">
+                <div id="grimColumn" class="relic-column"></div>
+                <div id="sinisterColumn" class="relic-column"></div>
+                <div id="wickedColumn" class="relic-column"></div>
+            </div>
+
+            <!-- Mode Toggle -->
+            <button id="modeToggleBtn" class="primary-btn wide-btn">
+                Mode: Standard Challenges
+            </button>
+
+            <!-- Challenge Stage Count -->
+            <label>Number of Challenges:</label>
+            <select id="challengeStageSelect">
+                <option value="2">2 Stages</option>
+                <option value="3">3 Stages</option>
+                <option value="4">4 Stages</option>
+            </select>
+
+            <!-- Confirm Players -->
+            <button id="confirmPlayersBtn" class="primary-btn wide-btn">
+                Confirm Players
+            </button>
+
+            <!-- Session Stats -->
+            <div class="session-stats">
+                <p><strong>Wins:</strong> <span id="sessionWinsValue">0</span></p>
+                <p><strong>Fails:</strong> <span id="sessionFailsValue">0</span></p>
+            </div>
+
+        </section>
+
+        <!-- ===================== RIGHT PANEL (CHALLENGE AREA) ===================== -->
+        <section id="challengeArea" class="panel panel-right" style="display:none;">
+
+            <!-- Fog layer injected by JS -->
+            <!-- (ui.js will append <div class="fog-layer"></div>) -->
+
+            <!-- Challenge Result -->
+            <div id="result" class="challenge-result"></div>
+
+            <!-- Stopwatch -->
+            <div id="stopwatchTimer" class="stopwatch"></div>
+
+            <!-- Challenge Buttons (Standard Mode Only) -->
+            <div id="challengeButtons" class="control-row" style="display:none;">
+                <button id="bossBtn" class="secondary-btn">Boss</button>
+                <button id="survivalBtn" class="secondary-btn">Survival</button>
+                <button id="trailBtn" class="secondary-btn">Relic Trail</button>
+                <button id="startingBtn" class="secondary-btn">Starting Room</button>
+            </div>
+
+            <!-- Begin Button -->
+            <button id="beginBtn" class="primary-btn" style="display:none;">
+                Begin Challenge
+            </button>
+
+            <!-- Pass / Fail -->
+            <div id="passFailContainer" class="control-row" style="display:none;">
+                <button id="passBtn" class="pass-btn">Pass</button>
+                <button id="failBtn" class="fail-btn">Fail</button>
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<!-- ===================== JS MODULES ===================== -->
+<script type="module" src="./js/main.js"></script>
+
+<div id="confirmModal" class="modal-overlay" style="display:none;">
+    <div class="modal-box panel">
+        <div class="chalk-text modal-title">Confirm Players</div>
+        <div class="chalk-text modal-message">Lock in and continue?</div>
+
+        <div class="modal-buttons">
+            <button id="modalConfirmBtn" class="primary-btn">Confirm</button>
+            <button id="modalCancelBtn" class="secondary-btn">Cancel</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

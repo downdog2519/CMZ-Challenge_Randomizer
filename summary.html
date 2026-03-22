@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Challenge Summary</title>
+
+    <!-- Correct CSS paths -->
+    <link rel="stylesheet" href="./css/base.css" />
+    <link rel="stylesheet" href="./css/layout.css" />
+    <link rel="stylesheet" href="./css/components.css" />
+    <link rel="stylesheet" href="./css/animations.css" />
+    <link rel="stylesheet" href="./css/maps.css" />
+    <link rel="stylesheet" href="./css/relics.css" />
+    <link rel="stylesheet" href="./css/theme-bo7.css" />
+</head>
+
+<body class="summary-body">
+
+    <div class="summary-container">
+
+        <!-- ⭐ NEW: Top button bar -->
+<div class="summary-container">
+
+    <div class="summary-topbar">
+        <button id="backBtn" class="summary-btn neon-blue-btn">
+            Return to Menu
+        </button>
+
+        <button id="saveScreenshotBtn" class="summary-btn neon-blue-btn">
+            Save Screenshot
+        </button>
+    </div>
+
+    <div id="summaryContent" class="summary-content"></div>
+
+</div>
+
+        <!-- Summary content -->
+        <div id="summaryContent" class="summary-content"></div>
+
+    </div>
+
+    <!-- html2canvas for screenshot -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <!-- Summary logic + renderer -->
+    <script type="module" src="./js/summary.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+/* ============================================================
+   ANIMATIONS.CSS — Fog Drift, Neon Pulse, Flicker, Transitions
+   ============================================================ */
+
+/* ============================================================
+   SUBTLE FOG DRIFT (VERY SLOW)
+   ============================================================ */
+
+@keyframes fog-drift {
+    0% {
+        transform: translate3d(-5%, -5%, 0) scale(1.05);
+        opacity: 0.12;
+    }
+    50% {
+        transform: translate3d(5%, 5%, 0) scale(1.08);
+        opacity: 0.16;
+    }
+    100% {
+        transform: translate3d(-5%, -5%, 0) scale(1.05);
+        opacity: 0.12;
+    }
+}
+
+/* Fog layer element */
+.fog-layer {
+    position: absolute;
+    inset: 0;
+    background: url("../images/themes/fog.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.14; /* subtle */
+    pointer-events: none;
+    animation: fog-drift 48s ease-in-out infinite; /* VERY slow */
+    z-index: 3; /* above vignette, below UI */
+}
+
+/* ============================================================
+   NEON PULSE (Used for headings, active elements)
+   ============================================================ */
+
+@keyframes neon-pulse-purple {
+    0% { text-shadow: 0 0 8px rgba(125, 44, 255, 0.6); }
+    50% { text-shadow: 0 0 14px rgba(125, 44, 255, 0.9); }
+    100% { text-shadow: 0 0 8px rgba(125, 44, 255, 0.6); }
+}
+
+@keyframes neon-pulse-blue {
+    0% { text-shadow: 0 0 8px rgba(0, 200, 255, 0.6); }
+    50% { text-shadow: 0 0 14px rgba(0, 200, 255, 0.9); }
+    100% { text-shadow: 0 0 8px rgba(0, 200, 255, 0.6); }
+}
+
+/* Utility classes */
+.neon-pulse-purple {
+    animation: neon-pulse-purple 2.8s ease-in-out infinite;
+}
+
+.neon-pulse-blue {
+    animation: neon-pulse-blue 2.8s ease-in-out infinite;
+}
+
+/* ============================================================
+   SOFT FLICKER (Used for subtle BO7 ambience)
+   ============================================================ */
+
+@keyframes soft-flicker {
+    0%, 100% { opacity: 1; }
+    92% { opacity: 0.92; }
+    96% { opacity: 0.98; }
+}
+
+.flicker-soft {
+    animation: soft-flicker 6s linear infinite;
+}
+
+/* ============================================================
+   FADE TRANSITIONS
+   ============================================================ */
+
+.fade-in {
+    animation: fade-in 0.4s ease forwards;
+}
+
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-out {
+    animation: fade-out 0.3s ease forwards;
+}
+
+@keyframes fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}

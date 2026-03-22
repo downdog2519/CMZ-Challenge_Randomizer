@@ -1,0 +1,68 @@
+/* ============================================================
+   BASE.CSS — Global Reset + BO7 Theme Variables
+   ============================================================ */
+
+/* ---------- RESET ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ---------- FONTS ---------- */
+body {
+    font-family: Arial, sans-serif;
+    background: #050608; /* deep void black */
+    color: #e6e6e6;
+    overflow: hidden; /* fog overlay will sit above */
+}
+
+/* ---------- COLOR VARIABLES ---------- */
+:root {
+    --bo7-purple: #7d2cff;
+    --bo7-blue: #00c8ff;
+    --bo7-red: #ff2a2a;
+    --bo7-panel-dark: #0a0a0f;
+    --bo7-panel-mid: #1a1a22;
+    --bo7-border: #2a2a33;
+    --bo7-text-light: #f2f2f2;
+    --bo7-text-dim: #b8b8b8;
+
+    --bo7-glow-purple: 0 0 12px rgba(125, 44, 255, 0.65);
+    --bo7-glow-blue: 0 0 12px rgba(0, 200, 255, 0.65);
+}
+
+/* ---------- GLOBAL TEXT ---------- */
+h1, h2, h3, h4 {
+    color: var(--bo7-text-light);
+    letter-spacing: 1px;
+}
+
+p, span, label {
+    color: var(--bo7-text-dim);
+}
+
+/* ---------- SCROLLBAR ---------- */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #0d0d11;
+}
+::-webkit-scrollbar-thumb {
+    background: #2a2a33;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #3a3a44;
+}
+
+/* ---------- UTILITY ---------- */
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hidden {
+    display: none !important;
+}

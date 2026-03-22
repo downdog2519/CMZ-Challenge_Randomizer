@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CMZ Settings</title>
+    <link rel="stylesheet" href="./css/settings-bo7.css">
+</head>
+
+<body>
+
+<div id="settingsContainer" class="panel panel-full">
+
+    <h1 class="chalk-text settings-title">Settings</h1>
+
+<section class="settings-section">
+    <h2 class="chalk-text">Resolution</h2>
+    <select id="resolutionSelect">
+        <option value="1600x900">1600 × 900</option>
+        <option value="1920x1080">1920 × 1080</option>
+        <option value="2560x1440">2560 × 1440</option>
+        <option value="fullscreen">Fullscreen</option>
+    </select>
+</section>
+
+    <section class="settings-section">
+        <h2 class="chalk-text">Randomizer Settings</h2>
+
+        <label class="settings-checkbox">
+            <input type="checkbox" id="allowDuplicates">
+            Allow duplicate challenges
+        </label>
+
+        <label class="settings-checkbox">
+            <input type="checkbox" id="weightedBoss">
+            Increase boss challenge frequency
+        </label>
+
+        <label class="settings-checkbox">
+            <input type="checkbox" id="enableRelicRestrictions">
+            Enable relic‑based challenge restrictions
+        </label>
+    </section>
+
+    <button id="saveSettingsBtn" class="primary-btn wide-btn">
+        Save Settings
+    </button>
+
+</div>
+
+<script src="./js/settings.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+body {
+    margin: 0;
+    background: #000;
+    font-family: "Courier New", monospace;
+    color: #e0e0e0;
+}
+
+#settingsContainer {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+
+    background:
+        linear-gradient(to bottom, rgba(255,255,255,0.03), rgba(0,0,0,0.25)),
+        url("../images/themes/metal-medium.png");
+    background-size: cover;
+    background-blend-mode: overlay;
+
+    border: 1px solid rgba(0,200,255,0.25);
+    box-shadow:
+        inset 0 0 18px rgba(0,0,0,0.7),
+        0 0 14px rgba(0,200,255,0.25);
+
+    position: relative;
+}
+
+.settings-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 6px rgba(255,255,255,0.4);
+}
+
+.settings-section {
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.settings-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 6px 0;
+}
+
+select {
+    width: 220px;
+    padding: 6px;
+    background: #111;
+    border: 1px solid rgba(0,200,255,0.25);
+    color: #e0e0e0;
+    border-radius: 4px;
+}
+
+.primary-btn {
+    background: rgba(0,200,255,0.15);
+    border: 1px solid rgba(0,200,255,0.35);
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #e0e0e0;
+    text-shadow: 0 0 6px rgba(0,200,255,0.6);
+    box-shadow: 0 0 12px rgba(0,200,255,0.25);
+}

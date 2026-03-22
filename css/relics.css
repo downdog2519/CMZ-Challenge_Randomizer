@@ -1,0 +1,145 @@
+/* ============================================================
+   RELICS.CSS — Relic Colors, Glows, Tiles
+   ============================================================ */
+
+/* ---------- RELIC COLOR CLASSES ---------- */
+/* These match your JS: getRelicClass(name) */
+
+.relic-grim {
+    color: #9b59b6; /* purple */
+    text-shadow: 0 0 6px rgba(155, 89, 182, 0.6);
+}
+
+.relic-sinister {
+    color: #e67e22; /* orange */
+    text-shadow: 0 0 6px rgba(230, 126, 34, 0.6);
+}
+
+.relic-wicked {
+    color: #c0392b; /* red */
+    text-shadow: 0 0 6px rgba(192, 57, 43, 0.6);
+}
+
+/* ============================================================
+   RELIC TILE BASE
+   ============================================================ */
+
+.relic-option {
+    width: 52px;
+    height: 52px;
+    background: #0d0e13;
+    border: 1px solid var(--bo7-border);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.15s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+/* ---------- RELIC ICON ---------- */
+.relic-img {
+    max-width: 42px;
+    max-height: 42px;
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.15));
+    transition: 0.15s ease;
+}
+
+/* ============================================================
+   HOVER GLOWS (BASED ON RELIC TYPE)
+   ============================================================ */
+
+.relic-option:hover .relic-img {
+    transform: scale(1.05);
+}
+
+/* Grim → Purple glow */
+.relic-option:hover.relic-grim,
+.relic-option.relic-grim:hover {
+    border-color: #9b59b6;
+    box-shadow: 0 0 12px rgba(155, 89, 182, 0.7);
+}
+
+/* Sinister → Orange glow */
+.relic-option:hover.relic-sinister,
+.relic-option.relic-sinister:hover {
+    border-color: #e67e22;
+    box-shadow: 0 0 12px rgba(230, 126, 34, 0.7);
+}
+
+/* Wicked → Red glow */
+.relic-option:hover.relic-wicked,
+.relic-option.relic-wicked:hover {
+    border-color: #c0392b;
+    box-shadow: 0 0 12px rgba(192, 57, 43, 0.7);
+}
+
+/* ============================================================
+   SELECTED STATE (STRONGER GLOW)
+   ============================================================ */
+
+.relic-option.selected.relic-grim {
+    border-color: #b57be0;
+    box-shadow: 0 0 16px rgba(181, 123, 224, 0.9);
+}
+
+.relic-option.selected.relic-sinister {
+    border-color: #ff9f43;
+    box-shadow: 0 0 16px rgba(255, 159, 67, 0.9);
+}
+
+.relic-option.selected.relic-wicked {
+    border-color: #ff4d4d;
+    box-shadow: 0 0 16px rgba(255, 77, 77, 0.9);
+}
+
+/* ============================================================
+   RELIC GRID LAYOUT
+   ============================================================ */
+
+.relic-columns {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+
+.relic-column {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+}
+
+.relic-header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 6px;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+.grim-header { color: #9b59b6; }
+.sinister-header { color: #e67e22; }
+.wicked-header { color: #c0392b; }
+
+/* ============================================================
+   INLINE RELIC LIST (Challenge Box)
+   ============================================================ */
+
+.challenge-line.relic-grim,
+.challenge-line.relic-sinister,
+.challenge-line.relic-wicked {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 12px;
+    white-space: nowrap;
+}
+
+/* Remove vertical stacking spacing */
+.challenge-line {
+    margin-bottom: 4px;
+}
+
+

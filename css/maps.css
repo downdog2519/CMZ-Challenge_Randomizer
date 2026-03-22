@@ -1,0 +1,81 @@
+/* ============================================================
+   MAPS.CSS — BO7 Map Background Panels (Cover Mode)
+   ============================================================ */
+
+/* ---------- BASE MAP PANEL ---------- */
+#challengeArea {
+    width: 100%;
+    height: 100%; /* this is fine because .panel-right has height from flex */
+    background-color: #000;
+
+    background-size: contain;   /* <-- FIX: image fits inside panel */
+    background-position: center;
+    background-repeat: no-repeat;
+
+    position: relative;
+    overflow: hidden;
+}
+
+#challengeArea {
+    aspect-ratio: 16 / 9;
+}
+
+/* ---------- VIGNETTE OVERLAY ---------- */
+#challengeArea::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+        circle at center,
+        rgba(0, 0, 0, 0) 40%,
+        rgba(0, 0, 0, 0.55) 100%
+    );
+    z-index: 2; /* fog will sit above this */
+}
+
+/* ============================================================
+   MAP BACKGROUND CLASSES
+   ============================================================ */
+
+#challengeArea.map-Astra {
+    background-image: url("../images/themes/astra-panel.png");
+}
+
+#challengeArea.map-AshesoftheDamned,
+#challengeArea.map-ashes {
+    background-image: url("../images/themes/ashes-panel.png");
+}
+
+#challengeArea.map-ParadoxJunction {
+    background-image: url("../images/themes/paradox-panel.png");
+}
+
+#challengeArea.map-VandornFarm {
+    background-image: url("../images/themes/vandorn-panel.png");
+}
+
+#challengeArea.map-Exit115 {
+    background-image: url("../images/themes/exit115-panel.png");
+}
+
+#challengeArea.map-ZaryaCosmodrome {
+    background-image: url("../images/themes/zarya-panel.png");
+}
+
+#challengeArea.map-Mars {
+    background-image: url("../images/themes/mars-panel.png");
+}
+
+#challengeArea {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    aspect-ratio: 16 / 9; /* optional but makes it cinematic */
+}
+
+.panel-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
