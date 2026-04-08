@@ -4,54 +4,52 @@
 
 /* ---------- APP CONTAINER ---------- */
 #appContainer {
-    height: 100vh;
-    width: 100vw;
+    min-height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     position: relative;
-    overflow: hidden; /* fog layer sits above */
+    overflow: hidden;
+    background: transparent;
 }
 
 /* ---------- TOP BAR ---------- */
 .top-bar {
-    height: 64px;
-
-    background:
-        linear-gradient(to bottom, rgba(255,255,255,0.03), rgba(0,0,0,0.25)),
-        url("../images/themes/Challenge-Generator.png");
-    background-size: cover;
-    background-blend-mode: overlay;
+    min-height: 64px;
+    width: 100%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.06), rgba(0,0,0,0.45));
 
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 
-    padding: 0 12px;
+    padding: 10px 12px;
     position: relative;
-    box-shadow: 0 0 12px rgba(0,0,0,0.6);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.7);
 }
 
 .topbar-banner {
-    height: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    flex-grow: 1;
-    padding-left: 0; /* Fixed broken value */
+    justify-content: center;
+    width: 100%;
 }
 
 .cmz-banner {
-    transform: scaleX(1.40); /* 1.05 = subtle, 1.15 = noticeable */
-    transform-origin: left center;
+    max-height: 44px;
+    width: auto;
+    object-fit: contain;
 }
 
 /* ---------- MAIN LAYOUT ---------- */
 .main-layout {
     flex: 1;
     display: flex;
-    gap: 12px;
-    padding: 12px;
-    overflow: hidden;
+    gap: 14px;
+    padding: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 /* ---------- PANELS ---------- */
@@ -66,23 +64,23 @@
 
 /* Left panel (setup) */
 .panel-left {
-    width: 40%;
+    flex: 1 1 360px;
     min-width: 260px;
     max-width: 520px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 14px;
 }
 
 /* Right panel (challenge area) */
 .panel-right {
-    aspect-ratio: 16 / 9; /* or 4/3 depending on your map art */
-    height: auto;
-    width: 100%;
-    max-height: 100%;
+    flex: 1 1 420px;
+    min-width: 320px;
+    max-width: 860px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    min-height: 360px;
 }
 
 /* Full-width panel (summary page) */
@@ -109,7 +107,9 @@
 }
 
 #result.challenge-result {
-    margin-top: 230px; /* adjust this value if you want it lower */
+    margin-top: 16px;
+    width: calc(100% - 28px);
+    max-width: 720px;
 }
 
 /* Allow absolute-positioned timer inside challenge panel */
@@ -130,6 +130,56 @@
 .main-layout.full-right {
     justify-content: center;
     align-items: center;
+}
+
+@media (max-width: 900px) {
+    .top-bar {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .topbar-banner {
+        flex: 1 1 100%;
+        justify-content: center;
+    }
+
+    .top-bar button {
+        width: auto;
+        flex: 1 1 180px;
+    }
+
+    .main-layout {
+        gap: 16px;
+        padding: 12px;
+    }
+
+    .panel-left,
+    .panel-right {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+
+    .panel-right {
+        min-height: auto;
+    }
+}
+
+@media (max-width: 620px) {
+    .top-bar {
+        padding: 12px 10px;
+    }
+
+    .top-bar button {
+        width: 100%;
+    }
+
+    .main-layout {
+        padding: 10px;
+    }
+
+    .panel {
+        padding: 12px;
+    }
 }
 
 

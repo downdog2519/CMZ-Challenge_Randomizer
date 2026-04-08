@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Challenge Summary</title>
 
     <!-- Correct CSS paths -->
@@ -19,23 +20,16 @@
     <div class="summary-container">
 
         <!-- ⭐ NEW: Top button bar -->
-<div class="summary-container">
+        <div class="summary-topbar">
+            <button id="backBtn" class="summary-btn neon-blue-btn">
+                Return to Menu
+            </button>
 
-    <div class="summary-topbar">
-        <button id="backBtn" class="summary-btn neon-blue-btn">
-            Return to Menu
-        </button>
+            <button id="saveScreenshotBtn" class="summary-btn neon-blue-btn">
+                Save Screenshot
+            </button>
+        </div>
 
-        <button id="saveScreenshotBtn" class="summary-btn neon-blue-btn">
-            Save Screenshot
-        </button>
-    </div>
-
-    <div id="summaryContent" class="summary-content"></div>
-
-</div>
-
-        <!-- Summary content -->
         <div id="summaryContent" class="summary-content"></div>
 
     </div>

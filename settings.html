@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CMZ Settings</title>
     <link rel="stylesheet" href="./css/settings-bo7.css">
 </head>
@@ -12,38 +13,131 @@
 
     <h1 class="chalk-text settings-title">Settings</h1>
 
-<section class="settings-section">
-    <h2 class="chalk-text">Resolution</h2>
-    <select id="resolutionSelect">
-        <option value="1600x900">1600 × 900</option>
-        <option value="1920x1080">1920 × 1080</option>
-        <option value="2560x1440">2560 × 1440</option>
-        <option value="fullscreen">Fullscreen</option>
-    </select>
-</section>
+    <section class="settings-section">
+        <h2 class="chalk-text">Resolution</h2>
+        <select id="resolutionSelect" aria-label="Screen resolution">
+            <option value="1600x900">1600 × 900</option>
+            <option value="1920x1080">1920 × 1080</option>
+            <option value="2560x1440">2560 × 1440</option>
+            <option value="fullscreen">Fullscreen</option>
+        </select>
+    </section>
 
     <section class="settings-section">
         <h2 class="chalk-text">Randomizer Settings</h2>
-
         <label class="settings-checkbox">
             <input type="checkbox" id="allowDuplicates">
             Allow duplicate challenges
         </label>
-
-        <label class="settings-checkbox">
-            <input type="checkbox" id="weightedBoss">
-            Increase boss challenge frequency
-        </label>
-
-        <label class="settings-checkbox">
-            <input type="checkbox" id="enableRelicRestrictions">
-            Enable relic‑based challenge restrictions
-        </label>
     </section>
 
-    <button id="saveSettingsBtn" class="primary-btn wide-btn">
-        Save Settings
-    </button>
+    <!-- BOSS MODE SETTINGS -->
+    <section class="settings-section">
+        <h2 class="chalk-text">Boss Mode Settings</h2>
+
+        <label class="settings-checkbox">
+            <input type="checkbox" id="bossFieldUpgrades" checked>
+            Field Upgrades — randomize one unique upgrade per player, no duplicates
+        </label>
+
+        <label class="settings-checkbox">
+            <input type="checkbox" id="bossRelicSettings">
+            Relic Settings
+        </label>
+
+        <div id="bossRelicPanel" class="sub-panel sub-panel--hidden">
+            <div class="slider-row">
+                <span class="slider-lbl">Relic Level</span>
+                <div class="slider-wrap">
+                    <input type="range" id="bossRelicLevel" class="lvl-slider" min="1" max="5" value="3" aria-label="Boss relic level">
+                    <div class="tick-row"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+                </div>
+                <span class="lvl-badge" id="bossRelicLevelVal">3</span>
+            </div>
+            <p class="relic-info" id="bossRelicInfo"></p>
+        </div>
+    </section>
+
+    <!-- SURVIVAL MODE SETTINGS -->
+    <section class="settings-section">
+        <h2 class="chalk-text">Survival Mode Settings</h2>
+
+        <label class="settings-checkbox">
+            <input type="checkbox" id="survivalFieldUpgrades" checked>
+            Field Upgrades — randomize one unique upgrade per player, no duplicates
+        </label>
+
+        <label class="settings-checkbox">
+            <input type="checkbox" id="survivalRelicSettings">
+            Relic Settings
+        </label>
+
+        <div id="survivalRelicPanel" class="sub-panel sub-panel--hidden">
+            <div class="slider-row">
+                <span class="slider-lbl">Relic Level</span>
+                <div class="slider-wrap">
+                    <input type="range" id="survivalRelicLevel" class="lvl-slider" min="1" max="5" value="3" aria-label="Survival relic level">
+                    <div class="tick-row"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+                </div>
+                <span class="lvl-badge" id="survivalRelicLevelVal">3</span>
+            </div>
+            <p class="relic-info" id="survivalRelicInfo"></p>
+        </div>
+
+        <!-- Round Range Settings -->
+        <h3 class="chalk-text round-settings-title">Round Range</h3>
+        <div class="round-boxes-grid">
+
+            <div class="round-box">
+                <div class="round-box-head">Quick Play</div>
+                <div class="round-box-body">
+                    <div class="round-row">
+                        <span class="round-val" id="qpStdMinVal">11</span>
+                        <input type="range" id="qpStdMin" class="round-slider" min="0" max="13" value="0" aria-label="Quick Play minimum round">
+                    </div>
+                    <div class="round-row">
+                        <span class="round-val" id="qpStdMaxVal">31</span>
+                        <input type="range" id="qpStdMax" class="round-slider" min="0" max="13" value="4" aria-label="Quick Play maximum round">
+                    </div>
+                </div>
+            </div>
+
+            <div class="round-box">
+                <div class="round-box-head">Cursed</div>
+                <div class="round-box-body">
+                    <div class="round-row">
+                        <span class="round-val" id="qpCrsMinVal">31</span>
+                        <input type="range" id="qpCrsMin" class="round-slider" min="0" max="13" value="4" aria-label="Cursed minimum round">
+                    </div>
+                    <div class="round-row">
+                        <span class="round-val" id="qpCrsMaxVal">71</span>
+                        <input type="range" id="qpCrsMax" class="round-slider" min="0" max="13" value="12" aria-label="Cursed maximum round">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="settings-btn-row">
+        <button id="resetDefaultsBtn" class="secondary-btn">Reset to Defaults</button>
+        <button id="saveSettingsBtn" class="primary-btn">Save Settings</button>
+    </div>
+    <div class="settings-danger-row">
+        <button id="completeResetBtn" class="danger-btn">Complete Reset</button>
+    </div>
+
+    <!-- Complete Reset Confirmation Modal -->
+    <div id="completeResetModal" class="confirm-modal hidden" role="dialog" aria-modal="true" aria-labelledby="confirmResetTitle">
+        <div class="confirm-modal-box">
+            <h3 id="confirmResetTitle" class="confirm-modal-title">Complete Reset</h3>
+            <p class="confirm-modal-body">This will permanently delete all player profiles, clear the leaderboard, and restore all settings to default.<br><br>This cannot be undone.</p>
+            <div class="confirm-modal-actions">
+                <button id="confirmResetCancelBtn" class="secondary-btn">Cancel</button>
+                <button id="confirmResetOkBtn" class="danger-btn">Yes, Reset Everything</button>
+            </div>
+        </div>
+    </div>
 
 </div>
 

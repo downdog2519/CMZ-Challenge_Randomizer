@@ -10,15 +10,10 @@
 .panel-left,
 .panel-right,
 .panel-full {
-    background: 
-        linear-gradient(
-            to bottom,
-            rgba(255, 255, 255, 0.03),
-            rgba(0, 0, 0, 0.25)
-        ),
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
         url("../images/themes/metal-medium.png");
     background-size: cover;
-    background-blend-mode: overlay;
     border: 1px solid var(--bo7-border);
     box-shadow:
         inset 0 0 18px rgba(0, 0, 0, 0.6),
@@ -32,28 +27,24 @@
 .top-bar {
     height: 64px;
 
-    background:
-        linear-gradient(to bottom, rgba(255,255,255,0.03), rgba(0,0,0,0.25)),
-        url("../images/themes/metal-medium.png");
-    background-size: cover;
-    background-blend-mode: overlay;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.06), rgba(0,0,0,0.45));
 
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 
     padding: 0 12px;
     position: relative;
-    box-shadow: 0 0 12px rgba(0,0,0,0.6);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.7);
 }
 
 .topbar-banner {
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     flex-grow: 1;
-    padding-left: 0; /* Fixed broken value */
+    padding-left: 0;
 }
 
 .cmz-banner {

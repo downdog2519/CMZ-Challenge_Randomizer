@@ -1,3 +1,17 @@
+/* Page visibility */
+.main-page {
+    width: 100%;
+}
+.main-page.hidden {
+    display: none !important;
+}
+
+/* Highlight selected buttons */
+button.selected, .secondary-btn.selected, .primary-btn.selected {
+    outline: 2px solid #7d2cff;
+    box-shadow: 0 0 12px #7d2cff88;
+    background: rgba(125,44,255,0.12);
+}
 /* ============================================================
    COMPONENTS.CSS — Buttons, Inputs, Tiles, Challenge UI
    ============================================================ */
@@ -13,6 +27,11 @@ button {
     padding: 10px 16px;
     color: var(--bo7-text-light);
     background: #11131a;
+}
+
+button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
 }
 
 /* ---------- PRIMARY BUTTON (PURPLE GLOW) ---------- */
@@ -106,10 +125,10 @@ button {
 
 /* ---------- RESET BUTTON (TOP RIGHT) ---------- */
 .reset-btn {
-    position: absolute;
-    top: 18px;
-    right: 90px;
-    z-index: 10;
+    position: relative;
+    top: auto;
+    right: auto;
+    z-index: 1;
 }
 
 /* ============================================================
@@ -125,6 +144,13 @@ select {
     border-radius: 4px;
     outline: none;
     transition: 0.15s ease;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--bo7-text-light);
+    font-size: 0.95rem;
 }
 
 input:focus,
@@ -217,6 +243,7 @@ select:focus {
     align-items: center;
     gap: 12px;
     margin-top: 12px;
+    flex-wrap: wrap;
 }
 
 /* ============================================================
@@ -396,6 +423,22 @@ select:focus {
     box-sizing: border-box;
 
     z-index: 20;
+}
+
+.summary-body {
+    min-height: 100vh;
+    background: #050608;
+}
+
+.summary-container {
+    max-width: 1140px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 14px 16px 24px;
+}
+
+.summary-content {
+    padding-top: 78px;
 }
 
 /* Shared neon-blue button style */

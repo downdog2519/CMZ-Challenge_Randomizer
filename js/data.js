@@ -58,7 +58,6 @@ export const fieldUpgrades = [
 
 /* ============================================================
    SURVIVAL MODE — CORRECT ROUND VALUES
-   (Your real system: 11 → 76 in steps of 5)
    ============================================================ */
 
 export const survivalRoundValues = [
@@ -120,38 +119,38 @@ export const bossTiers = {
 
 /* ============================================================
    TRAIL RULES — REQUIRED RELIC POOLS PER MAP
-   (Matches your stated design)
    ============================================================ */
 
 const paradoxPool = [
-    "Rocket",
-    "Summoning Key",
-    "Mangler Helmet"
+    "Rocket",          // grim
+    "Summoning Key",   // sinister
+    "Mangler Helmet"   // wicked
 ];
 
 const astraPool = [
-    "Civil Protector Head",
-    "Golden Spork",
-    "Spider Fang",
-    "Gong",
-    "Seed",
-    "Matryoshika Doll"
+    "Civil Protector Head", // wicked
+    "Golden Spork",         // wicked
+    "Spider Fang",          // sinister
+    "Gong",                 // grim
+    "Seed",                 // grim
+    "Matryoshika Doll"      // sinister
 ];
 
 const ashesPool = allRelics.filter(
     r => !paradoxPool.includes(r) && !astraPool.includes(r)
 );
 
+/* Relic-type lookups for trail: quick play uses grim only. */
+export const trailMapGrimRelics = {
+    "Paradox Junction":     paradoxPool.filter(r => grimRelics.includes(r)),
+    "Astra":                astraPool.filter(r => grimRelics.includes(r)),
+    "Ashes of the Damned":  ashesPool.filter(r => grimRelics.includes(r))
+};
+
 export const trailRules = {
-    "Paradox Junction": {
-        pool: paradoxPool
-    },
-    Astra: {
-        pool: astraPool
-    },
-    "Ashes of the Damned": {
-        pool: ashesPool
-    }
+    "Paradox Junction": { pool: paradoxPool },
+    Astra:              { pool: astraPool },
+    "Ashes of the Damned": { pool: ashesPool }
 };
 
 /* ============================================================
@@ -162,12 +161,12 @@ export const survivalMaps = [
     "Vandorn Farm",
     "Exit 115",
     "Zarya Cosmodrome",
-    "Mars"
+    "Mars",
+    "Ashwood"
 ];
 
 /* ============================================================
    STARTING ROOM ROUND TABLES
-   (Your original values — unchanged)
    ============================================================ */
 
 export const startingRoomRounds = [
@@ -181,3 +180,15 @@ export const startingRoomWeightsStandard = [
 export const startingRoomWeightsExtreme = [
     15, 18, 23, 28, 34, 45, 48, 52, 35
 ];
+
+/* Quick Play: 11-31 only, weighted toward lower rounds */
+export const startingRoomRoundsQuick   = [11, 16, 21, 26, 31];
+export const startingRoomWeightsQuick  = [30, 28, 22, 14, 6];
+
+/* Normal Mode: 31-71 weighted toward mid-high */
+export const startingRoomRoundsNormal  = [31, 36, 41, 46, 51, 56, 61, 66, 71];
+export const startingRoomWeightsNormal = [8, 10, 13, 16, 16, 14, 12, 8, 3];
+
+/* Quick Play Survival: 11-31 only */
+export const survivalRoundsQuick  = [11, 16, 21, 26, 31];
+export const survivalWeightsQuick = [25, 28, 24, 16, 7];

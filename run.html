@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMZ — Run</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/layout.css">
+    <link rel="stylesheet" href="./css/components.css">
+    <link rel="stylesheet" href="./css/maps.css">
+    <link rel="stylesheet" href="./css/relics.css">
+    <link rel="stylesheet" href="./css/animations.css">
+    <link rel="stylesheet" href="./css/theme-bo7.css">
+</head>
+
+<body>
+<div id="appContainer">
+
+    <!-- TOP BAR -->
+    <header class="top-bar">
+        <div class="topbar-banner">
+            <img src="./images/themes/Challenge-Generator.png" class="cmz-banner" alt="CMZ Banner">
+        </div>
+    </header>
+
+    <!-- RUN LAYOUT -->
+    <main class="main-layout run-page-layout">
+
+        <!-- Stats Bar -->
+        <div class="run-stats-bar">
+            <div id="stopwatchTimer" class="run-timer">
+                <span class="chalk-text">Time</span>
+                <div class="neon-pulse-blue">0:00</div>
+            </div>
+            <div class="run-score">
+                <span class="run-score-w">W: <strong id="sessionWinsValue">0</strong></span>
+                <span class="run-score-l">L: <strong id="sessionFailsValue">0</strong></span>
+            </div>
+            <button id="homeBtn" class="secondary-btn small-btn">&larr; Menu</button>
+        </div>
+
+        <!-- Challenge Display Panel -->
+        <div id="challengeArea" class="panel panel-right run-challenge-area">
+            <div id="result"></div>
+        </div>
+
+        <!-- Run Controls -->
+        <div class="run-controls">
+
+            <!-- Standard challenge type buttons -->
+            <div id="challengeButtons" class="run-type-btns">
+                <button id="bossBtn" class="primary-btn run-type-btn">Boss Challenge</button>
+                <button id="survivalBtn" class="primary-btn run-type-btn">Survival</button>
+                <button id="trailBtn" class="primary-btn run-type-btn">Relic Trail</button>
+                <button id="startingBtn" class="primary-btn run-type-btn">Starting Room</button>
+            </div>
+
+            <!-- Begin challenge (standard initial / extreme) -->
+            <button id="beginBtn" class="secondary-btn wide-btn run-begin-btn">Begin Challenge</button>
+
+            <!-- Pass / Fail -->
+            <div id="passFailContainer" class="run-pass-fail">
+                <button id="passBtn" class="pass-btn run-result-btn">&#10003; Pass</button>
+                <button id="failBtn" class="fail-btn run-result-btn">&#10007; Fail</button>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Hidden elements required by ui.js — DO NOT REMOVE -->
+    <div id="setupContainer" style="display:none;"></div>
+    <div id="gamertagInputs" style="display:none;"></div>
+
+</div>
+
+<!-- Run entry point -->
+<script type="module" src="./js/run.js"></script>
+</body>
+</html>

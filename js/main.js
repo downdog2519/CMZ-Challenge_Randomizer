@@ -57,6 +57,7 @@ const passBtn = document.getElementById("passBtn");
 const failBtn = document.getElementById("failBtn");
 
 const resetSessionBtn = document.getElementById("resetSessionBtn");
+const themeToggleBtn = document.getElementById("themeToggleBtn");
 
 /* ============================================================
    INITIALIZATION
@@ -199,6 +200,10 @@ resetSessionBtn.addEventListener("click", () => {
     // Reset UI buttons
     showBeginButton();
     showChallengeButtons();
+});
+
+themeToggleBtn.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
 });
 
 /* ============================================================

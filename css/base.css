@@ -9,12 +9,35 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+    min-height: 100%;
+    color: #e6e6e6;
+}
+
 /* ---------- FONTS ---------- */
 body {
+    min-height: 100vh;
     font-family: Arial, sans-serif;
-    background: #050608; /* deep void black */
+    background-color: #1c1c1c;
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.52), rgba(0, 0, 0, 0.52)),
+        url("../images/themes/metal-medium.png");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
     color: #e6e6e6;
-    overflow: hidden; /* fog overlay will sit above */
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+    color: inherit;
 }
 
 /* ---------- COLOR VARIABLES ---------- */
@@ -65,4 +88,10 @@ p, span, label {
 
 .hidden {
     display: none !important;
+}
+
+/* ---------- DARK MODE TOGGLE ---------- */
+body.dark-mode {
+    background: #f5f5f5;
+    color: #333;
 }

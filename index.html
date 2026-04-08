@@ -2,9 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CMZ Challenge Generator</title>
 
-    <!-- CSS LAYER (Modular + BO7 Theme) -->
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/layout.css">
     <link rel="stylesheet" href="./css/components.css">
@@ -12,127 +17,406 @@
     <link rel="stylesheet" href="./css/relics.css">
     <link rel="stylesheet" href="./css/animations.css">
     <link rel="stylesheet" href="./css/theme-bo7.css">
+    <link rel="stylesheet" href="./css/pages.css">
 </head>
 
 <body>
-
 <div id="appContainer">
 
-    <!-- ===================== TOP BAR ===================== -->
-<header class="top-bar">
-    <div class="topbar-banner">
-        <img src="./images/themes/Challenge-Generator.png" class="cmz-banner" alt="CMZ Banner">
-    </div>
+    <!-- ==================== TOP BAR ==================== -->
+    <header class="top-bar">
+        <div class="topbar-banner">
+            <img src="./images/themes/Challenge-Generator.png" class="cmz-banner" alt="CMZ Banner">
+        </div>
+    </header>
 
-   <button id="settingsBtn" class="secondary-btn small-btn">Settings</button>
-   <button id="resetSessionBtn" class="secondary-btn small-btn reset-btn">
-        Reset Session
-    </button>
-</header>
-
-    <!-- ===================== MAIN LAYOUT ===================== -->
+    <!-- ==================== PAGES ==================== -->
     <main class="main-layout">
 
-        <!-- ===================== LEFT PANEL (SETUP) ===================== -->
-        <section id="setupContainer" class="panel panel-left">
+        <!-- MAIN MENU -->
+        <section id="mainMenu" class="page-section main-page">
+            <div class="menu-card">
+                <h1 class="chalk-text menu-title">Main Menu</h1>
+                <nav class="menu-nav">
+                    <button class="menu-btn primary-btn" data-nav="startRunPage">Start Run</button>
+                    <button class="menu-btn primary-btn" data-nav="profilesPage">Manage Profiles</button>
+                    <button class="menu-btn primary-btn" data-nav="leaderboardPage">Leaderboards</button>
+                    <button class="menu-btn primary-btn" data-nav="settingsPage">Settings</button>
+                    <div class="menu-footer-row">
+                        <button class="menu-footer-btn secondary-btn" id="readmeBtn">README</button>
+                        <button class="menu-footer-btn discord-btn" id="discordBtn">Join our Discord</button>
+                    </div>
+                </nav>
+            </div>
+        </section>
 
-            <!-- Player Count -->
-            <label>Players:</label>
-            <select id="playerCountInput">
-                <option value="1">Solo</option>
-                <option value="2">2 Players</option>
-                <option value="3">3 Players</option>
-                <option value="4">4 Players</option>
-            </select>
-
-            <!-- Gamertags -->
-            <div id="gamertagInputs"></div>
-
-            <!-- Relic Ownership -->
-            <h3 class="chalk-text">Unlocked Relics</h3>
-            <div class="relic-columns">
-                <div id="grimColumn" class="relic-column"></div>
-                <div id="sinisterColumn" class="relic-column"></div>
-                <div id="wickedColumn" class="relic-column"></div>
+        <!-- START RUN -->
+        <section id="startRunPage" class="page-section main-page hidden">
+            <div class="page-header">
+                <button class="back-btn secondary-btn small-btn" data-nav-back>&larr; Back</button>
+                <h2 class="chalk-text page-title">Start Run</h2>
             </div>
 
-            <!-- Mode Toggle -->
-            <button id="modeToggleBtn" class="primary-btn wide-btn">
-                Mode: Standard Challenges
-            </button>
+            <!-- Step 1: Player Selection -->
+            <div id="srStep1" class="page-step">
+                <p class="step-label">Select Players (1&ndash;4):</p>
+                <div id="srProfiles" class="player-grid"></div>
+                <p id="srNoProfiles" class="info-text hidden">
+                    No profiles found. Add players in <strong>Manage Profiles</strong> first.
+                </p>
+                <button id="srNextBtn" class="primary-btn wide-btn" disabled>Continue &rarr;</button>
+            </div>
 
-            <!-- Challenge Stage Count -->
-            <label>Number of Challenges:</label>
-            <select id="challengeStageSelect">
-                <option value="2">2 Stages</option>
-                <option value="3">3 Stages</option>
-                <option value="4">4 Stages</option>
-            </select>
+            <!-- Step 2: Mode Selection -->
+            <div id="srStep2" class="page-step hidden">
+                <p class="step-label">Choose a Mode:</p>
+                <div class="mode-grid">
+                    <button class="mode-btn secondary-btn" data-mode="quick">
+                        <span class="mode-name">Quick Play</span>
+                        <span class="mode-desc">Jump straight in</span>
+                    </button>
+                    <button class="mode-btn secondary-btn" data-mode="normal">
+                        <span class="mode-name">Normal Mode</span>
+                        <span class="mode-desc">Select relics &amp; tier</span>
+                    </button>
+                    <button class="mode-btn secondary-btn" data-mode="round101">
+                        <span class="mode-name">Round 101 Boss</span>
+                        <span class="mode-desc">Elite boss challenge</span>
+                    </button>
+                </div>
+                <button class="secondary-btn small-btn" id="srBackToStep1">&larr; Back</button>
+            </div>
 
-            <!-- Confirm Players -->
-            <button id="confirmPlayersBtn" class="primary-btn wide-btn">
-                Confirm Players
-            </button>
+            <!-- Step 3-QP: Quick Play sub-modes -->
+            <div id="srStep3QP" class="page-step hidden">
+                <p class="step-label">Quick Play &mdash; Choose Mode:</p>
+                <div class="mode-grid">
+                    <button class="mode-btn secondary-btn" data-qpmode="boss">
+                        <span class="mode-name">Boss Mode</span>
+                        <span class="mode-desc">Standard boss challenge</span>
+                    </button>
+                    <button class="mode-btn secondary-btn" data-qpmode="starting">
+                        <span class="mode-name">Starting Room</span>
+                        <span class="mode-desc">Rounds 11&ndash;31</span>
+                    </button>
+                    <button class="mode-btn secondary-btn" data-qpmode="survival">
+                        <span class="mode-name">Survival</span>
+                        <span class="mode-desc">Cursed or Standard</span>
+                    </button>
+                    <button class="mode-btn secondary-btn" data-qpmode="trail">
+                        <span class="mode-name">Relic Trail</span>
+                        <span class="mode-desc">Grim relic hunt</span>
+                    </button>
+                </div>
+                <button class="secondary-btn small-btn" id="srBackToStep2FromQP">&larr; Back</button>
+            </div>
 
-            <!-- Session Stats -->
-            <div class="session-stats">
-                <p><strong>Wins:</strong> <span id="sessionWinsValue">0</span></p>
-                <p><strong>Fails:</strong> <span id="sessionFailsValue">0</span></p>
+            <!-- Step 4-QP-SURV: Quick Survival — Cursed or Standard -->
+            <div id="srStep4QPSurv" class="page-step hidden">
+                <p class="step-label">Quick Survival &mdash; Pick Mode:</p>
+                <div class="mode-grid">
+                    <button class="mode-btn secondary-btn" data-survmode="standard">
+                        <span class="mode-name">Standard</span>
+                        <span class="mode-desc">No relics, just survive</span>
+                    </button>
+                    <button class="mode-btn secondary-btn" data-survmode="cursed">
+                        <span class="mode-name">Cursed</span>
+                        <span class="mode-desc">Tier-based relic selection</span>
+                    </button>
+                </div>
+                <button class="secondary-btn small-btn" id="srBackToStep3QPFromSurv">&larr; Back</button>
+            </div>
+
+            <!-- Step 5-QP-CURSED: Quick Cursed Survival — Tier Selection -->
+            <div id="srStep5QPCursed" class="page-step hidden">
+                <p class="step-label">Quick Cursed Survival &mdash; Select Tier:</p>
+                <p id="srQPCursedHint" class="tier-hint"></p>
+                <div id="srTiersQPCursed" class="tier-grid"></div>
+                <div class="step-actions">
+                    <button class="secondary-btn small-btn" id="srBackToStep4QPSurv">&larr; Back</button>
+                    <button class="primary-btn" id="srLaunchQPCursed" disabled>Start Run &rarr;</button>
+                </div>
+            </div>
+
+            <!-- Step 3-NM: Normal Mode — Relic Selection -->
+            <div id="srStep3NM" class="page-step hidden">
+                <p class="step-label">Select relics you own:</p>
+                <div id="srRelics" class="relics-section"></div>
+                <div class="step-actions">
+                    <button class="secondary-btn small-btn" id="srBackToStep2FromNM">&larr; Back</button>
+                    <button class="primary-btn" id="srNextToTierBtn">Continue &rarr;</button>
+                </div>
+            </div>
+
+            <!-- Step 4-NM: Normal Mode — Tier Selection -->
+            <div id="srStep4NM" class="page-step hidden">
+                <p class="step-label">How many stages? (remaining stages are randomly chosen)</p>
+                <div id="srStageCountPicker" class="stage-count-picker">
+                    <button class="stage-count-btn secondary-btn" data-stages="1">1</button>
+                    <button class="stage-count-btn secondary-btn" data-stages="2">2</button>
+                    <button class="stage-count-btn secondary-btn active" data-stages="3">3</button>
+                    <button class="stage-count-btn secondary-btn" data-stages="4">4</button>
+                </div>
+                <p class="step-label" style="margin-top:18px;">Select your starting challenge type:</p>
+                <div class="nm-challenge-types">
+                    <button class="mode-btn secondary-btn" data-nmtype="boss">
+                        <span class="mode-name">Boss Mode</span>
+                        <span class="mode-desc">Tier-based boss fight</span>
+                    </button>
+                    <button class="mode-btn secondary-btn" data-nmtype="survival">
+                        <span class="mode-name">Survival (Cursed)</span>
+                        <span class="mode-desc">Rounds 11&ndash;76 weighted</span>
+                    </button>
+                    <button class="mode-btn secondary-btn" data-nmtype="trail">
+                        <span class="mode-name">Relic Trail</span>
+                        <span class="mode-desc">Unowned relic hunt</span>
+                    </button>
+                    <button class="mode-btn secondary-btn" data-nmtype="starting">
+                        <span class="mode-name">Starting Room</span>
+                        <span class="mode-desc">Rounds 31&ndash;71</span>
+                    </button>
+                </div>
+                <div id="srNMTierSection" class="tier-section hidden">
+                    <p class="step-label" style="margin-top:16px;">Select Tier:</p>
+                    <p class="info-text" id="srTierHint"></p>
+                    <div id="srTiers" class="tier-grid"></div>
+                </div>
+                <div class="step-actions" style="margin-top:16px;">
+                    <button class="secondary-btn small-btn" id="srBackToStep3NM">&larr; Back</button>
+                    <button class="primary-btn" id="srStartNormalBtn" disabled>Start Run &rarr;</button>
+                </div>
+            </div>
+
+            <!-- Step 3-R101: Round 101 — Cursed or Standard -->
+            <div id="srStep3R101" class="page-step hidden">
+                <p class="step-label">Round 101 Boss &mdash; Pick Mode:</p>
+                <div class="mode-grid">
+                    <button class="mode-btn secondary-btn" data-r101mode="standard">
+                        <span class="mode-name">Standard</span>
+                        <span class="mode-desc">No relics &mdash; auto generated</span>
+                    </button>
+                    <button class="mode-btn secondary-btn" data-r101mode="cursed">
+                        <span class="mode-name">Cursed</span>
+                        <span class="mode-desc">Select relics &amp; confirm tier</span>
+                    </button>
+                </div>
+                <button class="secondary-btn small-btn" id="srBackToStep2FromR101">&larr; Back</button>
+            </div>
+
+            <!-- Step 4-R101: Round 101 Cursed — Relic Selection -->
+            <div id="srStep4R101" class="page-step hidden">
+                <p class="step-label">Select relics you own:</p>
+                <div id="srRelicsR101" class="relics-section"></div>
+                <div class="step-actions">
+                    <button class="secondary-btn small-btn" id="srBackToStep3R101">&larr; Back</button>
+                    <button class="primary-btn" id="srR101ToTierBtn">Confirm Tier &rarr;</button>
+                </div>
+            </div>
+
+            <!-- Step 5-R101: Round 101 Cursed — Tier Confirmation -->
+            <div id="srStep5R101" class="page-step hidden">
+                <p class="step-label">Tier Qualification (Round 101 requires Tier 3):</p>
+                <div id="srTiersR101" class="tier-grid"></div>
+                <p id="srR101TierMsg" class="info-text" style="margin-top:8px;"></p>
+                <div class="step-actions">
+                    <button class="secondary-btn small-btn" id="srBackToStep4R101">&larr; Back</button>
+                    <button class="primary-btn" id="srLaunchR101Cursed" disabled>Start Run &rarr;</button>
+                </div>
             </div>
 
         </section>
 
-        <!-- ===================== RIGHT PANEL (CHALLENGE AREA) ===================== -->
-        <section id="challengeArea" class="panel panel-right" style="display:none;">
-
-            <!-- Fog layer injected by JS -->
-            <!-- (ui.js will append <div class="fog-layer"></div>) -->
-
-            <!-- Challenge Result -->
-            <div id="result" class="challenge-result"></div>
-
-            <!-- Stopwatch -->
-            <div id="stopwatchTimer" class="stopwatch"></div>
-
-            <!-- Challenge Buttons (Standard Mode Only) -->
-            <div id="challengeButtons" class="control-row" style="display:none;">
-                <button id="bossBtn" class="secondary-btn">Boss</button>
-                <button id="survivalBtn" class="secondary-btn">Survival</button>
-                <button id="trailBtn" class="secondary-btn">Relic Trail</button>
-                <button id="startingBtn" class="secondary-btn">Starting Room</button>
+        <!-- MANAGE PROFILES -->
+        <section id="profilesPage" class="page-section main-page hidden">
+            <div class="page-header">
+                <button class="back-btn secondary-btn small-btn" data-nav-back>&larr; Back</button>
+                <h2 class="chalk-text page-title">Manage Profiles</h2>
             </div>
-
-            <!-- Begin Button -->
-            <button id="beginBtn" class="primary-btn" style="display:none;">
-                Begin Challenge
-            </button>
-
-            <!-- Pass / Fail -->
-            <div id="passFailContainer" class="control-row" style="display:none;">
-                <button id="passBtn" class="pass-btn">Pass</button>
-                <button id="failBtn" class="fail-btn">Fail</button>
-            </div>
-
+            <form id="addProfileForm" class="add-profile-form" autocomplete="off">
+                <input id="profileNameInput" class="profile-input" maxlength="18" placeholder="Enter gamer name...">
+                <button type="submit" class="primary-btn">Add Player</button>
+            </form>
+            <p id="profilesMsg" class="form-msg error-msg" aria-live="polite"></p>
+            <div id="profilesList" class="profiles-grid"></div>
         </section>
+
+        <!-- LEADERBOARDS -->
+        <section id="leaderboardPage" class="page-section main-page hidden">
+            <div class="page-header">
+                <button class="back-btn secondary-btn small-btn" data-nav-back>&larr; Back</button>
+                <h2 class="chalk-text page-title">Leaderboards</h2>
+            </div>
+            <div class="lb-controls">
+                <select id="lbSort" class="lb-sort-select">
+                    <option value="stage">Stage: Low &rarr; High</option>
+                    <option value="stageDesc">Stage: High &rarr; Low</option>
+                    <option value="name">Name: A &rarr; Z</option>
+                    <option value="top">Top Score First</option>
+                </select>
+            </div>
+            <div class="lb-table-wrap">
+                <table id="lbTable" class="lb-table">
+                    <thead>
+                        <tr>
+                            <th>Player</th>
+                            <th>Mode</th>
+                            <th>Tier</th>
+                            <th>Map</th>
+                            <th>Relics Used</th>
+                            <th>Time</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div id="lbDetails" class="lb-details"></div>
+            <p id="lbMsg" class="info-text"></p>
+        </section>
+
+        <!-- SETTINGS -->
+        <section id="settingsPage" class="page-section main-page hidden">
+            <div class="page-header">
+                <button class="back-btn secondary-btn small-btn" data-nav-back>&larr; Back</button>
+                <h2 class="chalk-text page-title">Settings</h2>
+            </div>
+            <form id="settingsForm" class="settings-form" autocomplete="off">
+                <div class="settings-group">
+                    <label class="settings-label" for="resolutionSelect">Resolution</label>
+                    <select id="resolutionSelect" class="settings-select">
+                        <option value="1600x900">1600 &times; 900</option>
+                        <option value="1920x1080">1920 &times; 1080</option>
+                        <option value="2560x1440">2560 &times; 1440</option>
+                        <option value="fullscreen">Fullscreen</option>
+                    </select>
+                </div>
+                <div class="settings-group">
+                    <p class="settings-label">Randomizer Features</p>
+                    <label class="toggle-label"><input type="checkbox" id="allowDuplicates"> Allow duplicate challenges</label>
+                </div>
+
+                <!-- BOSS MODE SETTINGS -->
+                <fieldset class="weight-fieldset boss-fieldset">
+                    <legend>Boss Mode Settings</legend>
+
+                    <label class="toggle-label">
+                        <input type="checkbox" id="bossFieldUpgrades" checked>
+                        Field Upgrades — randomize one unique upgrade per player, no duplicates
+                    </label>
+
+                    <label class="toggle-label">
+                        <input type="checkbox" id="bossRelicSettings">
+                        Relic Settings
+                    </label>
+
+                    <div id="bossRelicPanel" class="mode-sub-panel mode-sub-panel--hidden">
+                        <div class="level-slider-row">
+                            <span class="level-slider-lbl">Relic Level</span>
+                            <div class="level-slider-wrap">
+                                <input type="range" id="bossRelicLevel" class="lvl-slider" min="1" max="5" value="3" aria-label="Boss relic level">
+                                <div class="lvl-tick-row"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+                            </div>
+                            <span class="lvl-badge" id="bossRelicLevelVal">3</span>
+                        </div>
+                        <p class="mode-relic-info" id="bossRelicInfo"></p>
+                    </div>
+                </fieldset>
+
+                <!-- SURVIVAL MODE SETTINGS -->
+                <fieldset class="weight-fieldset surv-fieldset">
+                    <legend>Survival Mode Settings</legend>
+
+                    <label class="toggle-label">
+                        <input type="checkbox" id="survivalFieldUpgrades" checked>
+                        Field Upgrades — randomize one unique upgrade per player, no duplicates
+                    </label>
+
+                    <label class="toggle-label">
+                        <input type="checkbox" id="survivalRelicSettings">
+                        Relic Settings
+                    </label>
+
+                    <div id="survivalRelicPanel" class="mode-sub-panel mode-sub-panel--hidden">
+                        <div class="level-slider-row">
+                            <span class="level-slider-lbl">Relic Level</span>
+                            <div class="level-slider-wrap">
+                                <input type="range" id="survivalRelicLevel" class="lvl-slider" min="1" max="5" value="3" aria-label="Survival relic level">
+                                <div class="lvl-tick-row"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+                            </div>
+                            <span class="lvl-badge" id="survivalRelicLevelVal">3</span>
+                        </div>
+                        <p class="mode-relic-info" id="survivalRelicInfo"></p>
+                    </div>
+
+                    <!-- Round Range Settings -->
+                    <div class="round-range-block">
+                        <p class="settings-label round-range-lbl-top">Round Range</p>
+                        <div class="round-boxes-row">
+
+                            <!-- Quick Play -->
+                            <div class="round-box">
+                                <div class="round-box-head">Quick Play</div>
+                                <div class="round-box-body">
+                                    <div class="round-row">
+                                        <span class="round-val" id="qpStdMinVal">11</span>
+                                        <input type="range" id="qpStdMin" class="round-rng-slider" min="0" max="13" value="0" aria-label="Quick Play minimum round">
+                                    </div>
+                                    <div class="round-row">
+                                        <span class="round-val" id="qpStdMaxVal">31</span>
+                                        <input type="range" id="qpStdMax" class="round-rng-slider" min="0" max="13" value="4" aria-label="Quick Play maximum round">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Cursed -->
+                            <div class="round-box">
+                                <div class="round-box-head">Cursed</div>
+                                <div class="round-box-body">
+                                    <div class="round-row">
+                                        <span class="round-val" id="qpCrsMinVal">31</span>
+                                        <input type="range" id="qpCrsMin" class="round-rng-slider" min="0" max="13" value="4" aria-label="Cursed minimum round">
+                                    </div>
+                                    <div class="round-row">
+                                        <span class="round-val" id="qpCrsMaxVal">71</span>
+                                        <input type="range" id="qpCrsMax" class="round-rng-slider" min="0" max="13" value="12" aria-label="Cursed maximum round">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="settings-actions">
+                    <div class="settings-btn-row">
+                        <button type="button" id="resetDefaultsBtn" class="secondary-btn">Reset to Defaults</button>
+                        <button type="submit" class="primary-btn">Save Settings</button>
+                    </div>
+                    <div class="settings-danger-row">
+                        <button type="button" id="completeResetBtn" class="danger-btn">Complete Reset</button>
+                    </div>
+                    <p id="settingsMsg" class="form-msg success-msg" aria-live="polite"></p>
+                </div>
+            </form>
+        </section>
+
+        <!-- Complete Reset Confirmation Modal -->
+        <div id="completeResetModal" class="confirm-modal hidden" role="dialog" aria-modal="true" aria-labelledby="confirmResetTitle">
+            <div class="confirm-modal-box">
+                <h3 id="confirmResetTitle" class="confirm-modal-title">Complete Reset</h3>
+                <p class="confirm-modal-body">This will permanently delete all player profiles, clear the leaderboard, and restore all settings to default.<br><br>This cannot be undone.</p>
+                <div class="confirm-modal-actions">
+                    <button id="confirmResetCancelBtn" class="secondary-btn">Cancel</button>
+                    <button id="confirmResetOkBtn" class="danger-btn">Yes, Reset Everything</button>
+                </div>
+            </div>
+        </div>
 
     </main>
-
 </div>
 
-<!-- ===================== JS MODULES ===================== -->
-<script type="module" src="./js/main.js"></script>
-
-<div id="confirmModal" class="modal-overlay" style="display:none;">
-    <div class="modal-box panel">
-        <div class="chalk-text modal-title">Confirm Players</div>
-        <div class="chalk-text modal-message">Lock in and continue?</div>
-
-        <div class="modal-buttons">
-            <button id="modalConfirmBtn" class="primary-btn">Confirm</button>
-            <button id="modalCancelBtn" class="secondary-btn">Cancel</button>
-        </div>
-    </div>
-</div>
+<!-- Single JS entry point -->
+<script type="module" src="./js/app.js"></script>
 
 </body>
 </html>

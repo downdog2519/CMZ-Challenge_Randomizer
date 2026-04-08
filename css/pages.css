@@ -1,0 +1,974 @@
+/* ============================================================
+   PAGES.CSS — Per-page layout and component styles
+   ============================================================ */
+
+/* ============================================================
+   RUN PAGE LAYOUT
+   ============================================================ */
+.run-page-layout {
+    flex-direction: column;
+    align-items: center;
+    padding: 14px;
+    gap: 12px;
+}
+
+.run-stats-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    max-width: 860px;
+    background: var(--bo7-panel-dark);
+    border: 1px solid var(--bo7-border);
+    border-radius: 8px;
+    padding: 10px 18px;
+}
+
+.run-timer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 56px;
+    font-size: 0.82rem;
+}
+
+.run-score {
+    display: flex;
+    gap: 16px;
+    flex: 1;
+    font-family: "Courier New", monospace;
+    font-size: 0.95rem;
+}
+
+.run-score-w strong { color: #00ff88; }
+.run-score-l strong { color: #ff4d4d; }
+
+.run-challenge-area {
+    width: 100%;
+    max-width: 860px;
+    min-height: 220px;
+    padding: 20px 24px;
+    font-family: "Courier New", monospace;
+    font-size: 0.95rem;
+    line-height: 1.75;
+}
+
+.run-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 860px;
+}
+
+.run-type-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.run-type-btn {
+    flex: 1 1 140px;
+    padding: 12px 16px;
+    font-size: 0.93rem;
+    letter-spacing: 0.5px;
+    border-radius: 6px;
+}
+
+.run-begin-btn {
+    padding: 14px;
+    border-radius: 6px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+}
+
+.run-pass-fail {
+    display: flex;
+    gap: 12px;
+}
+
+.run-result-btn {
+    flex: 1;
+    padding: 14px;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    border-radius: 6px;
+}
+
+@media (max-width: 620px) {
+    .run-type-btns { flex-direction: column; }
+    .run-pass-fail  { flex-direction: column; }
+}
+
+/* ---- Shared page section ---- */
+.page-section {
+    flex: 1 1 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    overflow-y: auto;
+    padding: 26px 28px;
+}
+
+/* ---- Page header (back button + title row) ---- */
+.page-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.page-title {
+    font-size: 1.55rem;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+.back-btn {
+    flex-shrink: 0;
+}
+
+/* ============================================================
+   MAIN MENU
+   ============================================================ */
+.menu-card {
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 28px 36px;
+}
+
+.menu-title {
+    font-size: 2rem;
+    margin-bottom: 32px;
+    text-align: center;
+    text-shadow: 0 0 22px rgba(125, 44, 255, 0.55),
+                 0 0 6px rgba(255, 255, 255, 0.3);
+}
+
+.menu-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+}
+
+.menu-btn {
+    width: 100%;
+    padding: 16px 28px;
+    font-size: 1.05rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: "Courier New", monospace;
+    border-radius: 8px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.menu-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 24px rgba(125, 44, 255, 0.55);
+}
+
+.menu-footer-row {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.menu-footer-btn {
+    flex: 1;
+    padding: 10px 12px;
+    font-size: 0.8rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-family: "Courier New", monospace;
+    border-radius: 8px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.menu-footer-btn:hover {
+    transform: translateY(-2px);
+}
+
+.discord-btn {
+    background: #5865f2;
+    color: #fff;
+    border: 1.5px solid #5865f2;
+}
+
+.discord-btn:hover {
+    background: #4752c4;
+    border-color: #4752c4;
+    box-shadow: 0 0 18px rgba(88, 101, 242, 0.55);
+}
+
+/* ============================================================
+   START RUN
+   ============================================================ */
+.page-step {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.page-step.hidden {
+    display: none !important;
+}
+
+.step-label {
+    font-family: "Courier New", monospace;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    color: var(--bo7-text-light);
+    margin-bottom: 2px;
+}
+
+.player-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.player-btn {
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
+
+.mode-grid {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.mode-btn {
+    flex: 1 1 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 20px 22px;
+    border-radius: 8px;
+    min-height: 80px;
+}
+
+.mode-name {
+    font-size: 1.05rem;
+    font-weight: bold;
+    font-family: "Courier New", monospace;
+    letter-spacing: 0.5px;
+    color: var(--bo7-text-light);
+}
+
+.mode-desc {
+    font-size: 0.82rem;
+    color: var(--bo7-text-dim);
+}
+
+/* Tier buttons */
+.tier-grid {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.tier-btn {
+    flex: 1 1 100px;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    border-radius: 6px;
+    transition: opacity 0.2s ease;
+}
+
+.tier-btn.active {
+    outline: 2px solid var(--bo7-purple);
+    box-shadow: 0 0 16px rgba(125, 44, 255, 0.55);
+    background: rgba(125, 44, 255, 0.14);
+}
+
+.tier-btn:disabled {
+    opacity: 0.32;
+    cursor: not-allowed;
+    filter: grayscale(45%);
+}
+
+.tier-locked {
+    opacity: 0.28 !important;
+    cursor: not-allowed !important;
+    filter: grayscale(60%) !important;
+    text-decoration: line-through;
+}
+
+/* Stage count picker — Normal Mode */
+.stage-count-picker {
+    display: flex;
+    gap: 10px;
+}
+
+.stage-count-btn {
+    flex: 1;
+    padding: 10px 0;
+    font-size: 1.1rem;
+    font-family: "Courier New", monospace;
+    letter-spacing: 1px;
+    border-radius: 8px;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.stage-count-btn.active {
+    outline: 2px solid var(--bo7-purple);
+    background: rgba(125, 44, 255, 0.18);
+    box-shadow: 0 0 14px rgba(125, 44, 255, 0.5);
+}
+
+/* Normal Mode — 4-way challenge type grid */
+.nm-challenge-types {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 4px;
+}
+
+.nm-challenge-types .mode-btn {
+    flex: 1 1 140px;
+}
+
+.nm-challenge-types .mode-btn.selected {
+    outline: 2px solid var(--bo7-purple);
+    background: rgba(125, 44, 255, 0.14);
+    box-shadow: 0 0 14px rgba(125, 44, 255, 0.45);
+}
+
+/* Tier sub-section within Normal Mode step */
+.tier-section {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid var(--bo7-border);
+}
+
+.tier-section.hidden {
+    display: none !important;
+}
+
+/* Relic selection area */
+.relics-section {
+    background: rgba(0, 0, 0, 0.22);
+    border: 1px solid var(--bo7-border);
+    border-radius: 10px;
+    padding: 16px 18px;
+}
+
+.relic-type-label {
+    font-size: 0.88rem;
+    font-family: "Courier New", monospace;
+    letter-spacing: 0.5px;
+    margin-top: 10px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.relic-type-label:first-child {
+    margin-top: 0;
+}
+
+.relic-type-label.relic-grim    { color: #b57be0; }
+.relic-type-label.relic-sinister { color: #ff9f43; }
+.relic-type-label.relic-wicked  { color: #ff4d4d; }
+
+.relic-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.step-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-top: 6px;
+}
+
+.info-text {
+    color: var(--bo7-text-dim);
+    font-size: 0.92rem;
+}
+
+/* ============================================================
+   MANAGE PROFILES
+   ============================================================ */
+.add-profile-form {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+}
+
+.profile-input {
+    flex: 1 1 220px;
+    min-width: 0;
+    font-size: 1rem;
+    font-family: "Courier New", monospace;
+    padding: 10px 14px;
+    background: #0c0d11;
+    border: 1px solid var(--bo7-border);
+    border-radius: 6px;
+    color: var(--bo7-text-light);
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.profile-input:focus {
+    border-color: var(--bo7-purple);
+    box-shadow: var(--bo7-glow-purple);
+}
+
+.profiles-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.profile-tile {
+    display: flex;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(125, 44, 255, 0.22);
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(125, 44, 255, 0.1);
+    transition: box-shadow 0.2s ease;
+    width: 100%;
+}
+
+.profile-tile:hover {
+    box-shadow: 0 0 20px rgba(125, 44, 255, 0.25);
+}
+
+.profile-tile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 13px 20px;
+}
+
+.profile-tile-header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ── Collapsed tab ── */
+.profile-relic-tab {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 9px 20px 13px;
+}
+
+.profile-relic-summary {
+    font-size: 0.82rem;
+    font-family: "Courier New", monospace;
+    color: var(--bo7-text-dim);
+    letter-spacing: 0.5px;
+}
+
+/* ── Expanded panel ── */
+.profile-relic-panel {
+    padding: 12px 20px 16px;
+    border-top: 1px solid rgba(125, 44, 255, 0.18);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.profile-relic-panel.hidden {
+    display: none;
+}
+
+.profile-relic-confirm {
+    align-self: flex-start;
+}
+
+.profile-name {
+    font-family: "Courier New", monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--bo7-text-light);
+    text-shadow: 0 0 8px rgba(125, 44, 255, 0.4);
+}
+
+.form-msg {
+    min-height: 22px;
+    font-size: 0.9rem;
+    margin-bottom: 2px;
+}
+
+.error-msg   { color: #ff4d4d; }
+.success-msg { color: #00c8ff; }
+
+/* ============================================================
+   LEADERBOARDS
+   ============================================================ */
+.lb-controls {
+    margin-bottom: 16px;
+}
+
+.lb-sort-select {
+    min-width: 200px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: #0c0d11;
+    border: 1px solid var(--bo7-border);
+    color: var(--bo7-text-light);
+}
+
+.lb-table-wrap {
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid var(--bo7-border);
+}
+
+.lb-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.lb-table thead tr {
+    background: rgba(125, 44, 255, 0.08);
+}
+
+.lb-table th {
+    padding: 12px 14px;
+    text-align: left;
+    font-family: "Courier New", monospace;
+    font-size: 0.88rem;
+    letter-spacing: 0.5px;
+    color: var(--bo7-blue);
+    border-bottom: 1px solid var(--bo7-border);
+}
+
+.lb-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    color: var(--bo7-text-dim);
+    font-size: 0.93rem;
+}
+
+.lb-table tbody tr:hover {
+    background: rgba(0, 200, 255, 0.04);
+}
+
+.lb-details {
+    margin-top: 18px;
+}
+
+.lb-detail-box {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 200, 255, 0.15);
+    border-radius: 8px;
+    padding: 16px 20px;
+    line-height: 1.75;
+}
+
+.lb-detail-box p strong {
+    color: var(--bo7-text-light);
+}
+
+/* ============================================================
+   SETTINGS
+   ============================================================ */
+.settings-form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    max-width: 580px;
+}
+
+.settings-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.settings-label {
+    font-family: "Courier New", monospace;
+    font-size: 0.88rem;
+    letter-spacing: 0.5px;
+    color: var(--bo7-blue);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+}
+
+.settings-select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    background: #0c0d11;
+    border: 1px solid var(--bo7-border);
+    color: var(--bo7-text-light);
+    font-size: 0.97rem;
+}
+
+.settings-select:focus {
+    border-color: var(--bo7-purple);
+    box-shadow: var(--bo7-glow-purple);
+    outline: none;
+}
+
+.toggle-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 0;
+    color: var(--bo7-text-dim);
+    font-size: 0.96rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.toggle-label input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+    accent-color: var(--bo7-purple);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.toggle-label:hover {
+    color: var(--bo7-text-light);
+}
+
+.weight-fieldset {
+    border-radius: 8px;
+    padding: 16px 18px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.weight-fieldset legend {
+    padding: 0 8px;
+    font-family: "Courier New", monospace;
+    font-size: 0.88rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.boss-fieldset {
+    border-color: rgba(125, 44, 255, 0.4);
+}
+
+.boss-fieldset legend {
+    color: var(--bo7-purple);
+}
+
+.surv-fieldset {
+    border-color: rgba(0, 200, 255, 0.35);
+}
+
+.surv-fieldset legend {
+    color: var(--bo7-blue);
+}
+
+.weight-row {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+.weight-row label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: var(--bo7-text-dim);
+    font-size: 0.9rem;
+}
+
+.weight-row input[type="number"] {
+    width: 74px;
+    padding: 7px 10px;
+    border-radius: 6px;
+    font-size: 1rem;
+    text-align: center;
+    background: #0c0d11;
+    border: 1px solid var(--bo7-border);
+    color: var(--bo7-text-light);
+}
+
+.weight-row input[type="number"]:focus {
+    border-color: var(--bo7-purple);
+    outline: none;
+}
+
+.settings-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* ============================================================
+   SETTINGS — NEW FIELDS (sub-panels, sliders, round boxes)
+   ============================================================ */
+
+/* Reset + Save row */
+.settings-btn-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.settings-btn-row .primary-btn,
+.settings-btn-row .secondary-btn {
+    flex: 1;
+    min-width: 140px;
+}
+
+.settings-danger-row {
+    margin-top: 10px;
+}
+
+.danger-btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 60, 60, 0.55);
+    background: rgba(255, 40, 40, 0.12);
+    color: #ff6b6b;
+    font-size: 0.9rem;
+    font-family: "Courier New", monospace;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.danger-btn:hover {
+    background: rgba(255, 40, 40, 0.25);
+    box-shadow: 0 0 14px rgba(255, 60, 60, 0.3);
+}
+
+/* Confirmation modal */
+.confirm-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.72);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.confirm-modal.hidden {
+    display: none;
+}
+
+.confirm-modal-box {
+    background: #0e0f15;
+    border: 1px solid rgba(255, 60, 60, 0.4);
+    border-radius: 12px;
+    padding: 28px 32px;
+    max-width: 420px;
+    width: 90%;
+    box-shadow: 0 0 40px rgba(255, 40, 40, 0.2);
+}
+
+.confirm-modal-title {
+    font-family: "Courier New", monospace;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #ff6b6b;
+    margin: 0 0 14px;
+}
+
+.confirm-modal-body {
+    font-size: 0.92rem;
+    color: var(--bo7-text-dim);
+    line-height: 1.6;
+    margin: 0 0 22px;
+}
+
+.confirm-modal-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+/* Sub-panel shown when a toggle is enabled */
+.mode-sub-panel {
+    margin: 10px 0 4px 26px;
+    padding: 12px 14px;
+    border-left: 2px solid rgba(125, 44, 255, 0.35);
+    border-radius: 0 8px 8px 0;
+    background: rgba(125, 44, 255, 0.06);
+}
+
+.mode-sub-panel--hidden {
+    display: none;
+}
+
+/* Level slider row */
+.level-slider-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.level-slider-lbl {
+    font-size: 0.88rem;
+    color: var(--bo7-text-dim);
+    white-space: nowrap;
+    min-width: 80px;
+}
+
+.level-slider-wrap {
+    flex: 1;
+    min-width: 120px;
+}
+
+.lvl-slider {
+    width: 100%;
+    accent-color: var(--bo7-purple);
+    cursor: pointer;
+}
+
+.lvl-tick-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2px;
+    margin-top: 2px;
+}
+
+.lvl-tick-row span {
+    font-size: 0.72rem;
+    color: var(--bo7-text-dim);
+}
+
+.lvl-badge {
+    min-width: 22px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--bo7-purple);
+}
+
+/* Relic info text box */
+.mode-relic-info {
+    margin-top: 10px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(125, 44, 255, 0.25);
+    font-size: 0.86rem;
+    color: var(--bo7-text-dim);
+    line-height: 1.5;
+}
+
+/* Round range settings block */
+.round-range-block {
+    margin-top: 6px;
+}
+
+.round-range-lbl-top {
+    margin-top: 14px;
+}
+
+.round-boxes-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+.round-box {
+    flex: 1;
+    min-width: 140px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 200, 255, 0.25);
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.25);
+}
+
+.round-box-head {
+    padding: 6px 10px;
+    font-family: "Courier New", monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--bo7-blue);
+    background: rgba(0, 200, 255, 0.08);
+    border-bottom: 1px solid rgba(0, 200, 255, 0.18);
+}
+
+.round-box-body {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.round-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow: hidden;
+}
+
+.round-rng-slider {
+    flex: 1;
+    min-width: 0;
+    accent-color: var(--bo7-blue);
+    cursor: pointer;
+}
+
+.round-val {
+    min-width: 30px;
+    flex-shrink: 0;
+    text-align: center;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--bo7-blue);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 620px) {
+    .page-section {
+        padding: 16px 14px;
+    }
+
+    .menu-card {
+        padding: 20px 12px 24px;
+    }
+
+    .menu-btn {
+        padding: 14px 18px;
+    }
+
+    .mode-grid {
+        flex-direction: column;
+    }
+
+    .weight-row {
+        gap: 14px;
+    }
+
+    .round-boxes-row {
+        flex-direction: column;
+    }
+
+    .settings-btn-row {
+        flex-direction: column;
+    }
+}

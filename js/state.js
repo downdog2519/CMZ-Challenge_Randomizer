@@ -46,6 +46,8 @@ export const state = {
     challengeStageCount: loadLocal("challengeStageCount", 3),
 
     /* ---------- SESSION STATE (sessionStorage) ---------- */
+    runMode:             sessionStorage.getItem('cmz_runMode') || 'quickBoss',
+    selectedTier:        Number(sessionStorage.getItem('cmz_tier') ?? 0),
     currentRun: loadSession("currentRun", []),
     currentChallengeType: loadSession("currentChallengeType", null),
     currentMode: loadSession("currentMode", "standard"),
@@ -81,6 +83,9 @@ export function saveSession() {
     saveSessionValue("currentRun", state.currentRun);
     saveSessionValue("currentChallengeType", state.currentChallengeType);
     saveSessionValue("currentMode", state.currentMode);
+
+    sessionStorage.setItem('cmz_runMode', state.runMode || 'quickBoss');
+    sessionStorage.setItem('cmz_tier', String(state.selectedTier ?? 0));
 
     saveSessionValue("extremeQueue", state.extremeQueue);
     saveSessionValue("extremeIndex", state.extremeIndex);
