@@ -1,0 +1,49 @@
+{
+  "name": "cmz-challenge-generator",
+  "version": "2.2.0",
+  "description": "CMZ BO7 Zombies challenge generator with Relic Codex, unlock guides, and all cursed maps.",
+  "author": "Downdog2519",
+  "license": "MIT",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electronmon .",
+    "build": "electron-builder",
+    "lint": "eslint app/js/**/*.js electron/**/*.js",
+    "lint:fix": "eslint app/js/**/*.js electron/**/*.js --fix",
+    "test": "node --experimental-vm-modules node_modules/jest-cli/bin/jest.js"
+  },
+  "dependencies": {
+    "electron-store": "^9.0.0"
+  },
+  "devDependencies": {
+    "electron": "^32.0.0",
+    "electron-builder": "^26.0.0",
+    "electronmon": "^2.0.2",
+    "eslint": "^9.0.0",
+    "jest": "^29.0.0"
+  },
+  "build": {
+    "appId": "com.cmz.challengegenerator",
+    "productName": "CMZ Challenge Generator",
+    "directories": {
+      "buildResources": "app/images",
+      "output": "dist"
+    },
+    "files": [
+      "app/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  },
+  "keywords": [],
+  "type": "module"
+}

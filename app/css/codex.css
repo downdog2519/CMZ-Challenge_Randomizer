@@ -1,0 +1,209 @@
+/* ============================================================
+   CODEX.CSS — Relic Codex browser
+   ============================================================ */
+
+.codex-intro {
+    text-align: center;
+    color: var(--cmz-gold, #d4af37);
+    opacity: 0.85;
+    margin: 0.25rem 0 1rem;
+    letter-spacing: 0.04em;
+}
+
+.codex-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.codex-search,
+.codex-select {
+    background: rgba(0, 0, 0, 0.65);
+    border: 1px solid rgba(212, 175, 55, 0.45);
+    color: #f2f2f2;
+    border-radius: 8px;
+    padding: 0.55rem 0.75rem;
+    min-width: 160px;
+}
+
+.codex-search {
+    flex: 1 1 220px;
+    max-width: 320px;
+}
+
+.codex-count {
+    font-size: 0.85rem;
+    color: var(--cmz-gold, #d4af37);
+    opacity: 0.8;
+}
+
+.codex-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+    gap: 0.9rem;
+    max-height: min(68vh, 820px);
+    overflow-y: auto;
+    padding: 0.25rem 0.35rem 1rem;
+}
+
+.codex-card {
+    display: grid;
+    grid-template-columns: 84px 1fr;
+    gap: 0.75rem;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 0.85rem;
+    text-align: left;
+}
+
+.codex-card.relic-grim {
+    border-color: rgba(192, 192, 192, 0.45);
+}
+.codex-card.relic-sinister {
+    border-color: rgba(180, 140, 255, 0.5);
+}
+.codex-card.relic-wicked {
+    border-color: rgba(255, 77, 77, 0.5);
+}
+
+.codex-img {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.codex-name {
+    font-size: 1.05rem;
+    margin: 0 0 0.35rem;
+    color: #f5f5f5;
+}
+
+.codex-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-bottom: 0.45rem;
+}
+
+.codex-pill {
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.45rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.35);
+}
+
+.codex-pill.tier {
+    color: var(--cmz-gold, #d4af37);
+    border-color: rgba(212, 175, 55, 0.45);
+}
+
+.codex-pill.map {
+    color: #9ad8ff;
+    border-color: rgba(0, 200, 255, 0.35);
+}
+
+.codex-pill.req {
+    color: #ffc48a;
+    border-color: rgba(255, 154, 31, 0.45);
+    text-transform: none;
+    letter-spacing: 0.02em;
+    max-width: 100%;
+    white-space: normal;
+    line-height: 1.35;
+}
+
+.codex-effect,
+.codex-trial {
+    font-size: 0.86rem;
+    line-height: 1.4;
+    color: #cfcfcf;
+    margin: 0 0 0.45rem;
+}
+
+.codex-effect strong,
+.codex-trial strong,
+.codex-section-label {
+    color: #f2f2f2;
+}
+
+.codex-section-label {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0.35rem 0 0.25rem;
+    color: var(--cmz-gold, #d4af37);
+}
+
+.codex-steps {
+    margin: 0 0 0.55rem;
+    padding-left: 1.15rem;
+    color: #d8d8d8;
+    font-size: 0.86rem;
+    line-height: 1.45;
+}
+
+.codex-steps li {
+    margin-bottom: 0.35rem;
+}
+
+.codex-trial {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 0.45rem;
+    margin-bottom: 0;
+}
+
+/* Top bar CMZ branding */
+.topbar-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 0.5rem 1rem;
+}
+
+.cmz-seal {
+    width: 88px;
+    height: 88px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.45));
+}
+
+.topbar-brand-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 180px;
+}
+
+.brand-kicker {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cmz-gold, #d4af37);
+    opacity: 0.85;
+}
+
+.brand-title {
+    font-family: Orbitron, sans-serif;
+    font-size: clamp(1rem, 2.2vw, 1.35rem);
+    color: var(--cmz-gold, #d4af37);
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+}
+
+.brand-sub {
+    font-size: 0.8rem;
+    color: #b8b8b8;
+    letter-spacing: 0.04em;
+}
+

@@ -1,0 +1,314 @@
+/* ============================================================
+   RESULTS.CSS — Win / fail bursts + epic summary
+   ============================================================ */
+
+.result-burst {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: grid;
+    place-items: center;
+    background: rgba(0, 0, 0, 0.62);
+    backdrop-filter: blur(4px);
+    animation: resultBurstIn 0.28s ease-out;
+    overflow: hidden;
+}
+
+.result-burst-out {
+    animation: resultBurstOut 0.28s ease-in forwards;
+}
+
+.result-burst-glow {
+    position: absolute;
+    width: min(70vw, 520px);
+    height: min(70vw, 520px);
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+.result-burst-pass .result-burst-glow {
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.55), transparent 70%);
+}
+
+.result-burst-fail .result-burst-glow {
+    background: radial-gradient(circle, rgba(255, 42, 42, 0.45), transparent 70%);
+}
+
+.result-burst-card {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 1.6rem 2rem 1.8rem;
+    min-width: min(90vw, 360px);
+    border-radius: 18px;
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    background:
+        linear-gradient(180deg, rgba(28, 22, 10, 0.95), rgba(8, 8, 10, 0.96));
+    box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.6) inset,
+        0 0 40px rgba(212, 175, 55, 0.25);
+}
+
+.result-burst-fail .result-burst-card {
+    border-color: rgba(255, 77, 77, 0.55);
+    box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.6) inset,
+        0 0 40px rgba(255, 42, 42, 0.28);
+}
+
+.result-burst-seal {
+    width: 92px;
+    height: 92px;
+    object-fit: contain;
+    margin-bottom: 0.55rem;
+    filter: drop-shadow(0 0 14px rgba(212, 175, 55, 0.45));
+    animation: resultSealPop 0.45s ease-out;
+}
+
+.result-burst-kicker {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(243, 227, 168, 0.85);
+    margin-bottom: 0.35rem;
+}
+
+.result-burst-fail .result-burst-kicker {
+    color: rgba(255, 180, 180, 0.9);
+}
+
+.result-burst-title {
+    font-family: Orbitron, "Courier New", monospace;
+    font-size: clamp(2rem, 6vw, 3rem);
+    letter-spacing: 0.12em;
+    margin-bottom: 0.35rem;
+}
+
+.result-burst-pass .result-burst-title {
+    color: #d4af37;
+    text-shadow: 0 0 22px rgba(212, 175, 55, 0.65);
+}
+
+.result-burst-fail .result-burst-title {
+    color: #ff4d4d;
+    text-shadow: 0 0 22px rgba(255, 42, 42, 0.55);
+}
+
+.result-burst-sub {
+    color: #cfcfcf;
+    font-size: 0.95rem;
+}
+
+.result-burst-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.result-particle {
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--color, #d4af37);
+    opacity: 0;
+    animation: resultParticle 1.15s ease-out forwards;
+    animation-delay: var(--delay, 0s);
+    box-shadow: 0 0 10px var(--color, #d4af37);
+}
+
+@keyframes resultBurstIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes resultBurstOut {
+    to { opacity: 0; }
+}
+
+@keyframes resultSealPop {
+    0% { transform: scale(0.4); opacity: 0; }
+    70% { transform: scale(1.08); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+@keyframes resultParticle {
+    0% {
+        opacity: 0;
+        transform: translate(0, 0) scale(0.4) rotate(0deg);
+    }
+    15% { opacity: 1; }
+    100% {
+        opacity: 0;
+        transform: translate(var(--x), var(--y)) scale(1) rotate(220deg);
+    }
+}
+
+/* ---------- SUMMARY HERO ---------- */
+.summary-hero {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.18), transparent 55%),
+        linear-gradient(180deg, rgba(20, 16, 10, 0.95), rgba(8, 8, 10, 0.96));
+    padding: 1.6rem 1.4rem 1.4rem;
+    text-align: center;
+    margin-bottom: 1.1rem;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.12);
+}
+
+.summary-hero.outcome-defeat {
+    border-color: rgba(255, 77, 77, 0.45);
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(255, 42, 42, 0.18), transparent 55%),
+        linear-gradient(180deg, rgba(24, 10, 10, 0.95), rgba(8, 8, 10, 0.96));
+}
+
+.summary-hero.outcome-mixed {
+    border-color: rgba(0, 200, 255, 0.4);
+}
+
+.summary-hero-seal {
+    width: 96px;
+    height: 96px;
+    object-fit: contain;
+    margin-bottom: 0.4rem;
+    filter: drop-shadow(0 0 16px rgba(212, 175, 55, 0.4));
+}
+
+.summary-outcome {
+    font-family: Orbitron, "Courier New", monospace;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    letter-spacing: 0.14em;
+    margin: 0.2rem 0 0.45rem;
+}
+
+.summary-hero.outcome-perfect .summary-outcome,
+.summary-hero.outcome-victory .summary-outcome {
+    color: #d4af37;
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.55);
+}
+
+.summary-hero.outcome-defeat .summary-outcome {
+    color: #ff4d4d;
+    text-shadow: 0 0 18px rgba(255, 42, 42, 0.5);
+}
+
+.summary-hero.outcome-mixed .summary-outcome {
+    color: #00c8ff;
+    text-shadow: 0 0 18px rgba(0, 200, 255, 0.45);
+}
+
+.summary-outcome-sub {
+    color: #cfcfcf;
+    margin-bottom: 0.9rem;
+}
+
+.summary-score-row {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.summary-score-chip {
+    min-width: 88px;
+    padding: 0.55rem 0.75rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(0, 0, 0, 0.35);
+}
+
+.summary-score-chip .label {
+    display: block;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #9a9a9a;
+}
+
+.summary-score-chip .value {
+    font-family: Orbitron, monospace;
+    font-size: 1.25rem;
+    color: #f2f2f2;
+}
+
+.summary-score-chip.wins .value { color: #00ff88; }
+.summary-score-chip.fails .value { color: #ff4d4d; }
+.summary-score-chip.time .value { color: #d4af37; }
+
+.summary-stage-box.is-pass {
+    border-color: rgba(0, 255, 136, 0.35);
+    box-shadow: 0 0 16px rgba(0, 255, 136, 0.08);
+}
+
+.summary-stage-box.is-fail {
+    border-color: rgba(255, 77, 77, 0.4);
+    box-shadow: 0 0 16px rgba(255, 42, 42, 0.08);
+}
+
+.summary-result-badge {
+    display: inline-block;
+    margin-left: 0.5rem;
+    padding: 0.15rem 0.45rem;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid currentColor;
+}
+
+.summary-result-badge.pass { color: #00ff88; }
+.summary-result-badge.fail { color: #ff4d4d; }
+
+.summary-confetti {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.summary-confetti span {
+    position: absolute;
+    top: -10%;
+    left: var(--left, 50%);
+    width: 7px;
+    height: 11px;
+    background: var(--c, #d4af37);
+    opacity: 0.85;
+    animation: summaryFall 2.8s linear infinite;
+    animation-delay: var(--d, 0s);
+    border-radius: 1px;
+}
+
+@keyframes summaryFall {
+    to {
+        transform: translateY(120%) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.summary-body {
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.12), transparent 45%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.75)),
+        url("../images/themes/cmz-menu-bg.png") center / cover fixed !important;
+}
+
+.summary-btn {
+    border-color: rgba(212, 175, 55, 0.55) !important;
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.35) !important;
+    color: #f3e3a8 !important;
+}
+
+.summary-btn:hover {
+    background: rgba(212, 175, 55, 0.14) !important;
+    box-shadow: 0 0 18px rgba(212, 175, 55, 0.55) !important;
+}

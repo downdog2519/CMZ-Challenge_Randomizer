@@ -1,0 +1,18 @@
+{
+  "name": "CMZ Challenge Generator",
+  "short_name": "CMZ Challenges",
+  "description": "BO7 Zombies challenge runs, relics, and unlock guides — a CMZ production.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "icons": [
+    {
+      "src": "./images/cmz-logo.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any"
+    }
+  ]
+}

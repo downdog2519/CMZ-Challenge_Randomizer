@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>CMZ — Challenge Results</title>
+    <link rel="icon" type="image/webp" href="./images/cmz-logo.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./css/base.css" />
+    <link rel="stylesheet" href="./css/layout.css" />
+    <link rel="stylesheet" href="./css/components.css" />
+    <link rel="stylesheet" href="./css/animations.css" />
+    <link rel="stylesheet" href="./css/maps.css" />
+    <link rel="stylesheet" href="./css/relics.css" />
+    <link rel="stylesheet" href="./css/theme-bo7.css" />
+    <link rel="stylesheet" href="./css/codex.css" />
+    <link rel="stylesheet" href="./css/results.css" />
+</head>
+
+<body class="summary-body">
+
+    <div class="summary-container">
+        <div class="summary-topbar">
+            <button id="backBtn" class="summary-btn">
+                Return to Menu
+            </button>
+            <button id="saveScreenshotBtn" class="summary-btn">
+                Save Screenshot
+            </button>
+        </div>
+
+        <div id="summaryContent" class="summary-content"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script type="module" src="./js/summary.js"></script>
+</body>
+</html>
